@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"encoding/json"
 	"github.com/gorilla/mux"
-	"github.com/Plan-3/ignite-defi-loan/loanClient/utils"
+	"github.com/Plan-3/ignite-defi-loan/loanClient/pkg/utils"
 
 	// Importing the general purpose Cosmos blockchain client
 	"github.com/ignite/cli/ignite/pkg/cosmosclient"
