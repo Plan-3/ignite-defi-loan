@@ -1,11 +1,12 @@
-module loanClient
+module github.com/Plan-3/ignite-defi-loan
 
 go 1.20
 
 require (
+	github.com/golang/protobuf v1.5.3
+	github.com/gorilla/mux v1.8.0
 	github.com/ignite/cli v0.27.1
 	loan v0.0.0
-	github.com/gorilla/mux v1.8.0
 )
 
 require (
@@ -53,11 +54,9 @@ require (
 	github.com/godbus/dbus v0.0.0-20190726142602-4481cbc300e2 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/glog v1.1.0 // indirect
-	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/btree v1.1.2 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect
-	github.com/gorilla/mux v1.8.0 // indirect
 	github.com/gorilla/websocket v1.5.0 // indirect
 	github.com/grpc-ecosystem/go-grpc-middleware v1.3.0 // indirect
 	github.com/grpc-ecosystem/grpc-gateway v1.16.0 // indirect

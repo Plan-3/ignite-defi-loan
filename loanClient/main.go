@@ -1,17 +1,16 @@
 package main
 
 import (
-    "context"
-    "fmt"
     "log"
+    "net/http"
 
-    // Importing the general purpose Cosmos blockchain client
-    "github.com/ignite/cli/ignite/pkg/cosmosclient"
+    "github.com/gorilla/mux"
+    "github.com/Plan-3/ignite-defi-loan/pkg/routes"
 
-    // Importing the types package of your blog blockchain
-    "loan/x/loan/types"
 )
 
 func main() {
-   
+    r := mux.NewRouter()
+	r.HandleFunc("/requestloan", routes.CreateLoan).Methods("POST")
+	log.Fatal(http.ListenAndServe(":8080", r))
 }

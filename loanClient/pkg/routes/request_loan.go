@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"io/ioutil"
 	"encoding/json"
-	"github.com/gorilla/mux"
-	"github.com/Plan-3/ignite-defi-loan/loanClient/pkg/utils"
+	//"github.com/Plan-3/ignite-defi-loan/loanClient/pkg/utils"
 
 	// Importing the general purpose Cosmos blockchain client
 	"github.com/ignite/cli/ignite/pkg/cosmosclient"
@@ -24,14 +24,36 @@ func CreateLoan(w http.ResponseWriter, r *http.Request) {
 			return
 	}
 
-	// Parse the data from the request body into a loan request struct
-	var loanReq types.MsgRequestLoan
-	if err := json.NewDecoder(r.Body).Decode(&loanReq); err != nil {
-			http.Error(w, "Invalid request body", http.StatusBadRequest)
+	// Read the request body
+	body, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+			http.Error(w, "Error reading request body", http.StatusBadRequest)
 			return
 	}
+	defer r.Body.Close()
 
-	fmt.Println(loanReq)
+	// Parse the data from the request body into a loan request struct
+	msg := &types.MsgRequestLoan{
+		/*
+		Creator: loanReq.Creator,
+		Amount: loanReq.Amount,
+		Fee: loanReq.Fee,
+		Collateral: loanReq.Collateral,
+		Deadline: loanReq.Deadline, 
+		*/
+}
+
+	// Unmarshal the JSON data into the protobuf-generated struct
+	// Unmarshal takes byte[] and a proto message
+	// turns the byte[] into a proto message
+	// do not need all the fields in the body of request to be present
+	// does need the json key to match exactly the proto field name
+	err = json.Unmarshal(body, msg)
+	if err != nil {
+		http.Error(w, "Failed to unmarshal json", 500)
+		return
+	}	
+	
 
 	// Set up your cosmos client and other initialization code here as before...
 	ctx := context.Background()
@@ -57,20 +79,16 @@ func CreateLoan(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	
-	// Your loan creation code here...
-	msg := &types.MsgRequestLoan{
-		Creator: loanReq.Creator,
-		Amount: loanReq.Amount,
-		Fee: loanReq.Fee,
-		Collateral: loanReq.Collateral,
-		Deadline: loanReq.Deadline,
-}
+
+	msg.Creator = addr
+	msg.Fee = "10zusd"
+	msg.Deadline = "37000"
+
 	// Broadcast a transaction from account `alice` with the message
-    // to create a post store response in txResp
-    txResp, err := client.BroadcastTx(ctx, account, msg)
-    if err != nil {
-        log.Fatal(err)
+  // to create a post store response in txResp
+  txResp, err := client.BroadcastTx(ctx, account, msg)
+  if err != nil {
+      log.Fatal(err)
     }
 
     // Print response from broadcasting a transaction
