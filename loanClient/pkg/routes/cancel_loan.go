@@ -17,7 +17,7 @@ import (
 
 )
 
-func CreateLoan(w http.ResponseWriter, r *http.Request) {
+func CancelLoan(w http.ResponseWriter, r *http.Request) {
 	// Ensure this endpoint only accepts POST requests
 	if r.Method != http.MethodPost {
 			http.Error(w, "Invalid request method", http.StatusMethodNotAllowed)
@@ -32,14 +32,11 @@ func CreateLoan(w http.ResponseWriter, r *http.Request) {
 	}
 	defer r.Body.Close()
 
-	// Parse the data from the request body into a loan request struct
-	msg := &types.MsgRequestLoan{
+	// create a pointer to a MsgCancelLoan type
+	msg := &types.MsgCancelLoan{
 		/*
 		Creator: loanReq.Creator,
-		Amount: loanReq.Amount,
-		Fee: loanReq.Fee,
-		Collateral: loanReq.Collateral,
-		Deadline: loanReq.Deadline, 
+		Id: loanReq.Id, 
 		*/
 }
 
@@ -67,40 +64,21 @@ func CreateLoan(w http.ResponseWriter, r *http.Request) {
 	}
 	
 	// Account `alice` was initialized during `ignite chain serve`
-	// can be name or address
+	// get accountName from a post body
+	accountName := "alice"
 	
-	/* Get account from the keyring
-	accountName := r.Body.Creator
-	// Account returns the account with name or address equal to nameOrAddress.
-func (c Client) Account(nameOrAddress string) (cosmosaccount.Account, error) {
-	defer c.lockBech32Prefix()()
-
-	acc, err := c.AccountRegistry.GetByName(nameOrAddress)
-	if err == nil {
-		return acc, nil
-	}
-	return c.AccountRegistry.GetByAddress(nameOrAddress)
-}
-
-// Address returns the account address from account name.
-func (c Client) Address(accountName string) (string, error) {
-	a, err := c.AccountRegistry.GetByName(accountName)
+	// Get account from the keyring
+	account, err := client.Account(accountName)
 	if err != nil {
-		return "", err
+		log.Fatal(err)
 	}
-	return a.Address(c.addressPrefix)
-}
+	
+	addr, err := account.Address(addressPrefix)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-
-addr, err := account.Address(addressPrefix)
-if err != nil {
-	log.Fatal(err)
-}
-*/
-account, err := client.Account(msg.Creator)
-if err != nil {
-	log.Fatal(err)
-}
+	msg.Creator = addr
 
 	// Broadcast a transaction from account `alice` with the message
   // to create a post store response in txResp
@@ -116,9 +94,18 @@ if err != nil {
     // Instantiate a query client for your `blog` blockchain
     queryClient := types.NewQueryClient(client.Context())
 
-    // Query the blockchain using the client's `PostAll` method
-    // to get all posts store all posts in queryResp
-    queryResp, err := queryClient.LoanAll(ctx, &types.QueryAllLoanRequest{})
+    // Query the blockchain using the client's `Loan` method in query_loan
+    // set up a pointer to type like create loan
+
+		loanreq := &types.QueryGetLoanRequest{}
+
+		errRequest := json.Unmarshal(body, loanreq)
+		if errRequest != nil {
+			http.Error(w, "Failed to unmarshal json", 500)
+			return
+		}
+
+    queryResp, err := queryClient.Loan(ctx, loanreq)
     if err != nil {
         log.Fatal(err)
     }
@@ -126,9 +113,4 @@ if err != nil {
     // Print response from querying all the posts
     fmt.Print("\n\nAll loans:\n\n")
     fmt.Println(queryResp)
-
-
-
-    // Respond with a 200 status to indicate that preflight request is allowed
-    w.WriteHeader(http.StatusOK)
 }
