@@ -63,21 +63,12 @@ func RepayLoan(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	
-	// Account `alice` was initialized during `ignite chain serve`
-	accountName := "alice"
 	
 	// Get account from the keyring
-	account, err := client.Account(accountName)
+	account, err := client.Account(msg.Creator)
 	if err != nil {
 		log.Fatal(err)
 	}
-	
-	addr, err := account.Address(addressPrefix)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	msg.Creator = addr
 
 	// Broadcast a transaction from account `alice` with the message
   // to create a post store response in txResp
@@ -93,14 +84,12 @@ func RepayLoan(w http.ResponseWriter, r *http.Request) {
     // Instantiate a query client for your `blog` blockchain
     queryClient := types.NewQueryClient(client.Context())
 
-    // Query the blockchain using the client's `PostAll` method
-    // to get all posts store all posts in queryResp
+
     queryResp, err := queryClient.LoanAll(ctx, &types.QueryAllLoanRequest{})
     if err != nil {
         log.Fatal(err)
     }
 
-    // Print response from querying all the posts
     fmt.Print("\n\nAll loans:\n\n")
     fmt.Println(queryResp)
 }

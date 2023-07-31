@@ -19,6 +19,7 @@ func handleOptions(w http.ResponseWriter, r *http.Request) {
 func main() {
     r := mux.NewRouter()
     // TODO: Add query get routes
+    r.HandleFunc("/blockheight", routes.GetBlock).Methods("GET")
     r.HandleFunc("/getaccounts/{address}", routes.GetAccountBalances).Methods("GET")
     r.HandleFunc("/getloans", routes.GetLoans).Methods("GET")
     r.HandleFunc("/getloan/{id}", routes.GetLoan).Methods("GET")

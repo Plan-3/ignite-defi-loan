@@ -36,10 +36,7 @@ func ApproveLoan(w http.ResponseWriter, r *http.Request) {
 	msg := &types.MsgApproveLoan{
 		/*
 		Creator: loanReq.Creator,
-		Amount: loanReq.Amount,
-		Fee: loanReq.Fee,
-		Collateral: loanReq.Collateral,
-		Deadline: loanReq.Deadline, 
+		Id: loanReq.Id,
 		*/
 }
 
