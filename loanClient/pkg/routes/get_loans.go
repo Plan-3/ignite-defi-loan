@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 	"encoding/json"
-	//"github.com/Plan-3/ignite-defi-loan/loanClient/pkg/utils"
+	"github.com/Plan-3/ignite-defi-loan/pkg/utils"
 
 	// Importing the general purpose Cosmos blockchain client
 	"github.com/ignite/cli/ignite/pkg/cosmosclient"
@@ -39,12 +39,14 @@ func GetLoans(w http.ResponseWriter, r *http.Request) {
         log.Fatal(err)
     }
 
+		filtered := utils.FilterLoanByState(queryResp)
+
     // Print response from querying all the loans
     fmt.Print("\n\nAll loans:\n\n")
-    fmt.Println(queryResp)
+    fmt.Printf("%T", queryResp)
 
 		// marshal response back to bytes[] and send to client
-		res, _ := json.Marshal(queryResp)
+		res, _ := json.Marshal(filtered)
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		w.Write(res)

@@ -70,7 +70,7 @@ func RepayLoan(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 
-	// Broadcast a transaction from account `alice` with the message
+	// Broadcast a transaction from account `msg.creator` with the message
   // to create a post store response in txResp
   txResp, err := client.BroadcastTx(ctx, account, msg)
   if err != nil {
@@ -78,7 +78,7 @@ func RepayLoan(w http.ResponseWriter, r *http.Request) {
     }
 
     // Print response from broadcasting a transaction
-    fmt.Print("MsgCreateLoan:\n\n")
+    fmt.Print("MsgRepayLoan:\n\n")
     fmt.Println(txResp)
 
     // Instantiate a query client for your `blog` blockchain
@@ -91,5 +91,5 @@ func RepayLoan(w http.ResponseWriter, r *http.Request) {
     }
 
     fmt.Print("\n\nAll loans:\n\n")
-    fmt.Println(queryResp)
+    fmt.Printf("%T", queryResp)
 }
