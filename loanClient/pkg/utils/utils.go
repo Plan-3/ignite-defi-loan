@@ -17,12 +17,49 @@ func ParseBody(r *http.Request, x interface{}) {
 	}
 }
 
-func FilterLoanByState(loan *types.QueryAllLoanResponse) []types.Loan {
+func FilterLoanByStateApprove(loan *types.QueryAllLoanResponse) []types.Loan {
 	var filteredLoan []types.Loan
 
 	for _, v := range loan.Loan {
 		if v.State == "requested" {
 			
+			filteredLoan = append(filteredLoan, v)
+		}
+	}
+
+	return filteredLoan
+}
+
+func FilterLoanByStateLiquidate(loan *types.QueryAllLoanResponse) []types.Loan {
+	var filteredLoan []types.Loan
+
+	for _, v := range loan.Loan {
+		if v.State == "approved" {
+			
+			filteredLoan = append(filteredLoan, v)
+		}
+	}
+
+	return filteredLoan
+}
+
+func FilterLoanById(loan *types.QueryAllLoanResponse, id int) []types.Loan {
+	var filteredLoan []types.Loan
+
+	for _, v := range loan.Loan {
+		if v.Id == id{
+			filteredLoan = append(filteredLoan, v)
+		}
+	}
+
+	return filteredLoan
+}
+
+func FilterLoanByIdAndState(loan *types.QueryAllLoanResponse, account string) []types.Loan {
+	var filteredLoan []types.Loan
+
+	for _, v := range loan.Loan {
+		if v.Id == id && v.State == "approved"{
 			filteredLoan = append(filteredLoan, v)
 		}
 	}
