@@ -2,7 +2,6 @@ package routes
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"encoding/json"
@@ -16,7 +15,7 @@ import (
 
 )
 
-func GetLoansAppoved(w http.ResponseWriter, r *http.Request) {
+func GetLoansApproved(w http.ResponseWriter, r *http.Request) {
 
 		// Set up your cosmos client and other initialization code here as before...
 		ctx := context.Background()
@@ -39,7 +38,7 @@ func GetLoansAppoved(w http.ResponseWriter, r *http.Request) {
         log.Fatal(err)
     }
 
-		filtered := utils.FilterLoanByStateApprove(queryResp)
+		filtered := utils.FilterLoanByStateLiquidate(queryResp)
 
 		// marshal response back to bytes[] and send to client
 		res, _ := json.Marshal(filtered)

@@ -2,7 +2,6 @@ package routes
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"encoding/json"
@@ -10,13 +9,14 @@ import (
 
 	// Importing the general purpose Cosmos blockchain client
 	"github.com/ignite/cli/ignite/pkg/cosmosclient"
+	"github.com/gorilla/mux"
 
 	// Importing the types package of your blog blockchain
 	"loan/x/loan/types"
 
 )
 
-func GetLoans(w http.ResponseWriter, r *http.Request) {
+func GetLoansAccountRepay(w http.ResponseWriter, r *http.Request) {
 
 		// use mux.Vars to get the id from the request
 		// ["id"] is defined in main 

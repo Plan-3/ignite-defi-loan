@@ -2,7 +2,6 @@ package routes
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"encoding/json"

@@ -6,9 +6,12 @@ import (
 
     "github.com/gorilla/mux"
     "github.com/Plan-3/ignite-defi-loan/pkg/routes"
+    "github.com/Plan-3/ignite-defi-loan/pkg/utils"
     "github.com/rs/cors"
 
 )
+
+
 func handleOptions(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000") // Replace with your Next.js app domain
     w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
@@ -20,18 +23,21 @@ func main() {
     r := mux.NewRouter()
     // TODO: Add query get routes
     r.HandleFunc("/blockheight", routes.GetBlock).Methods("GET")
+    r.HandleFunc("/requestkeys", routes.GetKey).Methods("GET")
     r.HandleFunc("/getaccounts/{address}", routes.GetAccountBalances).Methods("GET")
     r.HandleFunc("/getloans", routes.GetLoans).Methods("GET")
-    r.HandleFunc("/getloans/requested", routes.GetLoans).Methods("GET")
-    r.HandleFunc("/getloans/approved", routes.GetLoans).Methods("GET")
-    r.HandleFunc("/getloans/{address}", routes.GetLoans).Methods("GET")
+    r.HandleFunc("/getloans/requested", routes.GetLoansRequested).Methods("GET")
+    r.HandleFunc("/getloans/approved", routes.GetLoansApproved).Methods("GET")
+    r.HandleFunc("/getloans/{address}", routes.GetLoansAccount).Methods("GET")
+    r.HandleFunc("/getloans/{address}/repay", routes.GetLoansAccountRepay).Methods("GET")
     r.HandleFunc("/getloan/{id}", routes.GetLoan).Methods("GET")
 	r.HandleFunc("/requestloan", routes.CreateLoan).Methods("POST")
     r.HandleFunc("/cancelloan", routes.CancelLoan).Methods("POST")
     r.HandleFunc("/approveloan", routes.ApproveLoan).Methods("POST")
     r.HandleFunc("/liquidateloan", routes.LiquidateLoan).Methods("POST")
     r.HandleFunc("/repayloan", routes.RepayLoan).Methods("POST")
-
+    // check if api key is valid
+    r.Use(utils.ApiMiddleWare)
     // Create a new cors handler with the desired CORS options
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"http://localhost:3000", "http://localhost:3000/loan"}, // Replace with your Next.js app domain
