@@ -9,10 +9,9 @@ const TypeMsgTokenMint = "token_mint"
 
 var _ sdk.Msg = &MsgTokenMint{}
 
-func NewMsgTokenMint(creator string, amount sdk.Coin, denom string, denomAmount int64) *MsgTokenMint {
+func NewMsgTokenMint(creator string, denom string, denomAmount int64) *MsgTokenMint {
 	return &MsgTokenMint{
 		Creator: creator,
-		Amount:  amount,
 		Denom: denom,
 		DenomAmount: denomAmount,
 	}

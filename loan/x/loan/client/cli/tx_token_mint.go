@@ -6,7 +6,6 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
-	sdk "github.com/cosmos/cosmos-sdk/types"
 	"github.com/spf13/cobra"
 	"loan/x/loan/types"
 )
@@ -15,14 +14,10 @@ var _ = strconv.Itoa(0)
 
 func CmdTokenMint() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "token-mint [coin] [denom] [denomAmount]",
+		Use:   "token-mint [denom] [denomAmount]",
 		Short: "Broadcast message token-mint",
-		Args:  cobra.ExactArgs(3),
+		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-			argAmount, err := sdk.ParseCoinNormalized(args[0])
-			if err != nil {
-				return err
-			}
 
 			denom := args[1]
 			denomAmount, err := strconv.ParseInt(args[2], 10, 64)
@@ -34,7 +29,6 @@ func CmdTokenMint() *cobra.Command {
 
 			msg := types.NewMsgTokenMint(
 				clientCtx.GetFromAddress().String(),
-				argAmount,
 				denom,
 				denomAmount,
 			)
