@@ -67,3 +67,22 @@ func (k Keeper) MintTokens(ctx sdk.Context, receiver sdk.AccAddress, tokens sdk.
 
 	return nil
 }
+
+func (k Keeper) BurnTokens(ctx sdk.Context, receiver sdk.AccAddress, tokens sdk.Coin) error {
+
+	// send to receiver
+	if err := k.bankKeeper.SendCoinsFromAccountToModule(
+		ctx, receiver, types.ModuleName, sdk.NewCoins(tokens),
+	); err != nil {
+		panic(fmt.Sprintf("unable to send coins from account to module: %v", err))
+	}
+
+	// mint new tokens if the source of the transfer is the same chain
+	if err := k.bankKeeper.BurnCoins(
+		ctx, types.ModuleName, sdk.NewCoins(tokens),
+	); err != nil {
+		return err
+	}
+
+	return nil
+}

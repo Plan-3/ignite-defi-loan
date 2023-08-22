@@ -5,27 +5,27 @@ import (
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
-const TypeMsgTokenMint = "token_mint"
+const TypeMsgBurnToken = "burn_token"
 
-var _ sdk.Msg = &MsgTokenMint{}
+var _ sdk.Msg = &MsgBurnToken{}
 
-func NewMsgTokenMint(creator string, denom string, denomAmount int64) *MsgTokenMint {
-	return &MsgTokenMint{
-		Creator:     creator,
-		Denom:       denom,
-		DenomAmount: denomAmount,
+func NewMsgBurnToken(creator string, denom string, amount int64) *MsgBurnToken {
+	return &MsgBurnToken{
+		Creator: creator,
+		Denom:   denom,
+		Amount:  amount,
 	}
 }
 
-func (msg *MsgTokenMint) Route() string {
+func (msg *MsgBurnToken) Route() string {
 	return RouterKey
 }
 
-func (msg *MsgTokenMint) Type() string {
-	return TypeMsgTokenMint
+func (msg *MsgBurnToken) Type() string {
+	return TypeMsgBurnToken
 }
 
-func (msg *MsgTokenMint) GetSigners() []sdk.AccAddress {
+func (msg *MsgBurnToken) GetSigners() []sdk.AccAddress {
 	creator, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		panic(err)
@@ -33,12 +33,12 @@ func (msg *MsgTokenMint) GetSigners() []sdk.AccAddress {
 	return []sdk.AccAddress{creator}
 }
 
-func (msg *MsgTokenMint) GetSignBytes() []byte {
+func (msg *MsgBurnToken) GetSignBytes() []byte {
 	bz := ModuleCdc.MustMarshalJSON(msg)
 	return sdk.MustSortJSON(bz)
 }
 
-func (msg *MsgTokenMint) ValidateBasic() error {
+func (msg *MsgBurnToken) ValidateBasic() error {
 	_, err := sdk.AccAddressFromBech32(msg.Creator)
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)

@@ -6,31 +6,34 @@ import (
 	"github.com/cosmos/cosmos-sdk/client"
 	"github.com/cosmos/cosmos-sdk/client/flags"
 	"github.com/cosmos/cosmos-sdk/client/tx"
+	"github.com/spf13/cast"
 	"github.com/spf13/cobra"
 	"loan/x/loan/types"
 )
 
 var _ = strconv.Itoa(0)
 
-func CmdTokenMint() *cobra.Command {
+func CmdBurnToken() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "token-mint [denom] [denomAmount]",
-		Short: "Broadcast message token-mint",
+		Use:   "burn-token [denom] [amount]",
+		Short: "Broadcast message burn-token",
 		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-
-			denom := args[0]
-			denomAmount, err := strconv.ParseInt(args[1], 10, 64)
+			argDenom := args[0]
+			argAmount, err := cast.ToInt64E(args[1])
+			if err != nil {
+				return err
+			}
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {
 				return err
 			}
 
-			msg := types.NewMsgTokenMint(
+			msg := types.NewMsgBurnToken(
 				clientCtx.GetFromAddress().String(),
-				denom,
-				denomAmount,
+				argDenom,
+				argAmount,
 			)
 			if err := msg.ValidateBasic(); err != nil {
 				return err
