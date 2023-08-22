@@ -8,7 +8,7 @@ import (
 
 	"github.com/cosmos/cosmos-sdk/client"
 	// "github.com/cosmos/cosmos-sdk/client/flags"
-	"loan/x/loan/types"
+	"loan/x/vault/types"
 )
 
 var (
@@ -30,12 +30,6 @@ func GetTxCmd() *cobra.Command {
 		RunE:                       client.ValidateCmd,
 	}
 
-	cmd.AddCommand(CmdRequestLoan())
-	cmd.AddCommand(CmdApproveLoan())
-	cmd.AddCommand(CmdRepayLoan())
-	cmd.AddCommand(CmdLiquidateLoan())
-	cmd.AddCommand(CmdCancelLoan())
-	cmd.AddCommand(CmdTokenMint())
 	// this line is used by starport scaffolding # 1
 
 	return cmd

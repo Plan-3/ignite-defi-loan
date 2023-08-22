@@ -3,22 +3,22 @@ accounts:
 - name: alice
   coins:
   - 10000ctz
-  - 20000zusd
+  - 20zusd
   - 200000000stake
-- name: bob
+- name: vault
   coins:
-  - 10000cqt
-  - 10000zusd
+  - 100000zusd
   - 100000000stake
 - name: carol
   coins:
-  - 10000zusd
+  - 10000cqt
+  - 10zusd
   - 100000000stake
 client:
   openapi:
     path: docs/static/openapi.yml
 faucet:
-  name: bob
+  name: vault
   coins:
   - 5zusd
   - 100000stake

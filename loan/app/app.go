@@ -113,6 +113,9 @@ import (
 	loanmodule "loan/x/loan"
 	loanmodulekeeper "loan/x/loan/keeper"
 	loanmoduletypes "loan/x/loan/types"
+	vaultmodule "loan/x/vault"
+	vaultmodulekeeper "loan/x/vault/keeper"
+	vaultmoduletypes "loan/x/vault/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	appparams "loan/app/params"
@@ -174,6 +177,7 @@ var (
 		vesting.AppModuleBasic{},
 		consensus.AppModuleBasic{},
 		loanmodule.AppModuleBasic{},
+		vaultmodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -188,6 +192,7 @@ var (
 		govtypes.ModuleName:            {authtypes.Burner},
 		ibctransfertypes.ModuleName:    {authtypes.Minter, authtypes.Burner},
 		loanmoduletypes.ModuleName:     {authtypes.Minter, authtypes.Burner, authtypes.Staking},
+		vaultmoduletypes.ModuleName:    {authtypes.Minter, authtypes.Burner, authtypes.Staking},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 )
@@ -251,6 +256,8 @@ type App struct {
 	ScopedICAHostKeeper  capabilitykeeper.ScopedKeeper
 
 	LoanKeeper loanmodulekeeper.Keeper
+
+	VaultKeeper vaultmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -298,6 +305,7 @@ func New(
 		feegrant.StoreKey, evidencetypes.StoreKey, ibctransfertypes.StoreKey, icahosttypes.StoreKey,
 		capabilitytypes.StoreKey, group.StoreKey, icacontrollertypes.StoreKey, consensusparamtypes.StoreKey,
 		loanmoduletypes.StoreKey,
+		vaultmoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -530,6 +538,16 @@ func New(
 	)
 	loanModule := loanmodule.NewAppModule(appCodec, app.LoanKeeper, app.AccountKeeper, app.BankKeeper)
 
+	app.VaultKeeper = *vaultmodulekeeper.NewKeeper(
+		appCodec,
+		keys[vaultmoduletypes.StoreKey],
+		keys[vaultmoduletypes.MemStoreKey],
+		app.GetSubspace(vaultmoduletypes.ModuleName),
+
+		app.BankKeeper,
+	)
+	vaultModule := vaultmodule.NewAppModule(appCodec, app.VaultKeeper, app.AccountKeeper, app.BankKeeper)
+
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	/**** IBC Routing ****/
@@ -592,6 +610,7 @@ func New(
 		transferModule,
 		icaModule,
 		loanModule,
+		vaultModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 
 		crisis.NewAppModule(app.CrisisKeeper, skipGenesisInvariants, app.GetSubspace(crisistypes.ModuleName)), // always be last to make sure that it checks for all invariants and not only part of them
@@ -625,6 +644,7 @@ func New(
 		vestingtypes.ModuleName,
 		consensusparamtypes.ModuleName,
 		loanmoduletypes.ModuleName,
+		vaultmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
@@ -651,6 +671,7 @@ func New(
 		vestingtypes.ModuleName,
 		consensusparamtypes.ModuleName,
 		loanmoduletypes.ModuleName,
+		vaultmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
@@ -682,6 +703,7 @@ func New(
 		vestingtypes.ModuleName,
 		consensusparamtypes.ModuleName,
 		loanmoduletypes.ModuleName,
+		vaultmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 	app.mm.SetOrderInitGenesis(genesisModuleOrder...)
@@ -907,6 +929,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(icacontrollertypes.SubModuleName)
 	paramsKeeper.Subspace(icahosttypes.SubModuleName)
 	paramsKeeper.Subspace(loanmoduletypes.ModuleName)
+	paramsKeeper.Subspace(vaultmoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper

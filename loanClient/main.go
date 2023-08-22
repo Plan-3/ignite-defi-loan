@@ -6,7 +6,7 @@ import (
 
     "github.com/gorilla/mux"
     "github.com/Plan-3/ignite-defi-loan/pkg/routes"
-    "github.com/Plan-3/ignite-defi-loan/pkg/utils"
+    //"github.com/Plan-3/ignite-defi-loan/pkg/utils"
     "github.com/rs/cors"
 
 )
@@ -37,7 +37,7 @@ func main() {
     r.HandleFunc("/liquidateloan", routes.LiquidateLoan).Methods("POST")
     r.HandleFunc("/repayloan", routes.RepayLoan).Methods("POST")
     // check if api key is valid
-    r.Use(utils.ApiMiddleWare)
+    // r.Use(utils.ApiMiddleWare)
     // Create a new cors handler with the desired CORS options
 	c := cors.New(cors.Options{
 		AllowedOrigins: []string{"http://localhost:3000", "http://localhost:3000/loan"}, // Replace with your Next.js app domain

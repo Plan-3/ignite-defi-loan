@@ -2633,3 +2633,5 @@ definitions:
     type: object
   loan.loan.MsgRequestLoanResponse:
     type: object
+  loan.loan.MsgTokenMintResponse:
+    type: object

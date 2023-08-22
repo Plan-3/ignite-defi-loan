@@ -65,7 +65,7 @@ func ApproveLoan(w http.ResponseWriter, r *http.Request) {
 	
 	// Account `alice` was initialized during `ignite chain serve`
 	// TODO	get accountName from req body
-	accountName := "bob"
+	accountName := "vault"
 	
 	// Get account from the keyring
 	account, err := client.Account(accountName)
