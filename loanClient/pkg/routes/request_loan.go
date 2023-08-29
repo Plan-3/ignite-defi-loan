@@ -63,7 +63,7 @@ func CreateLoan(w http.ResponseWriter, r *http.Request) {
 	// Create a Cosmos client instance
 	client, err := cosmosclient.New(ctx, cosmosclient.WithAddressPrefix(addressPrefix))
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 	
 	// Account `alice` was initialized during `ignite chain serve`
@@ -94,19 +94,19 @@ func (c Client) Address(accountName string) (string, error) {
 
 addr, err := account.Address(addressPrefix)
 if err != nil {
-	log.Fatal(err)
+	log.Print(err)
 }
 */
 account, err := client.Account(msg.Creator)
 if err != nil {
-	log.Fatal(err)
+	log.Print(err)
 }
 
 	// Broadcast a transaction from account `alice` with the message
   // to create a post store response in txResp
   txResp, err := client.BroadcastTx(ctx, account, msg)
   if err != nil {
-      log.Fatal(err)
+      log.Print(err)
     }
 
     // Print response from broadcasting a transaction
@@ -120,12 +120,13 @@ if err != nil {
     // to get all posts store all posts in queryResp
     queryResp, err := queryClient.LoanAll(ctx, &types.QueryAllLoanRequest{})
     if err != nil {
-        log.Fatal(err)
+        log.Print(err)
     }
 
     // Print response from querying all the posts
     fmt.Print("\n\nAll loans:\n\n")
     fmt.Println(queryResp)
+		fmt.Println(ctx)
 
 
 

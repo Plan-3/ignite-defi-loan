@@ -1,5 +1,9 @@
 package types
 
+import (
+	sdkmath "cosmossdk.io/math"
+)
+
 const (
 	// ModuleName defines the module name
 	ModuleName = "loan"
@@ -13,6 +17,9 @@ const (
 	// MemStoreKey defines the in-memory store key
 	MemStoreKey = "mem_loan"
 )
+
+// cwei is the smallest unit of collateral
+var Cwei = sdkmath.NewInt(1000000000)
 
 func KeyPrefix(p string) []byte {
 	return []byte(p)

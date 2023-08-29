@@ -384,6 +384,9 @@ paths:
                       type: string
                     lender:
                       type: string
+                    timestamp:
+                      type: string
+                      format: int64
               pagination:
                 type: object
                 properties:
@@ -519,6 +522,9 @@ paths:
                     type: string
                   lender:
                     type: string
+                  timestamp:
+                    type: string
+                    format: int64
         default:
           description: An unexpected error response.
           schema:
@@ -2444,6 +2450,9 @@ definitions:
         type: string
       lender:
         type: string
+      timestamp:
+        type: string
+        format: int64
   loan.loan.Params:
     type: object
     description: Params defines the parameters for the module.
@@ -2502,6 +2511,9 @@ definitions:
               type: string
             lender:
               type: string
+            timestamp:
+              type: string
+              format: int64
       pagination:
         type: object
         properties:
@@ -2551,6 +2563,9 @@ definitions:
             type: string
           lender:
             type: string
+          timestamp:
+            type: string
+            format: int64
   loan.loan.QueryListPostResponse:
     type: object
     properties:
@@ -2631,9 +2646,13 @@ definitions:
     type: object
   loan.loan.MsgLiquidateLoanResponse:
     type: object
+  loan.loan.MsgRedeemResponse:
+    type: object
   loan.loan.MsgRepayLoanResponse:
     type: object
   loan.loan.MsgRequestLoanResponse:
+    type: object
+  loan.loan.MsgStakeResponse:
     type: object
   loan.loan.MsgTokenMintResponse:
     type: object

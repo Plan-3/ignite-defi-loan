@@ -16,6 +16,8 @@ service Msg {
   rpc CancelLoan    (MsgCancelLoan   ) returns (MsgCancelLoanResponse   );
   rpc TokenMint     (MsgTokenMint    ) returns (MsgTokenMintResponse    );
   rpc BurnToken     (MsgBurnToken    ) returns (MsgBurnTokenResponse    );
+  rpc Redeem        (MsgRedeem       ) returns (MsgRedeemResponse       );
+  rpc Stake         (MsgStake        ) returns (MsgStakeResponse        );
 }
 message MsgRequestLoan {
   string creator    = 1;
@@ -70,4 +72,18 @@ message MsgBurnToken {
 }
 
 message MsgBurnTokenResponse {}
+
+message MsgRedeem {
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgRedeemResponse {}
+
+message MsgStake {
+  string creator = 1;
+  string amount  = 2;
+}
+
+message MsgStakeResponse {}
 

@@ -2,26 +2,33 @@ version: 1
 accounts:
 - name: alice
   coins:
-  - 10000ctz
-  - 20zusd
-  - 200000000stake
+  - 100000000000000000000ctz
+  - 100000000000000000000usdc
+  - 10000000000000000000cstk
+  - 10000000000000000000zusd
 - name: vault
   coins:
-  - 100000zusd
-  - 100000000stake
+  - 10000000000000000000cstk
 - name: carol
   coins:
-  - 10000cqt
-  - 10zusd
-  - 100000000stake
+  - 100000000000000000000cqt
+  - 100000000000000000000usdc
+  # = 1 * 10**18
+  - 1000000000000000000cstk
+  - 10000000000000000000zusd
 client:
   openapi:
     path: docs/static/openapi.yml
 faucet:
   name: vault
   coins:
-  - 5zusd
-  - 100000stake
-validators:
+  - 1000000000000000000cstk
+validators: 
 - name: alice
-  bonded: 100000000stake
+  bonded: 1000000000000000000cstk
+
+genesis:
+  app_state:
+    staking:
+      params:
+        bond_denom: "cstk"

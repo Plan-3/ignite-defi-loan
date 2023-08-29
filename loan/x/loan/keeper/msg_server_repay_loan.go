@@ -3,9 +3,9 @@ package keeper
 import (
 	"context"
 
+	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
-
 	"loan/x/loan/types"
 )
 
@@ -22,7 +22,6 @@ func (k msgServer) RepayLoan(goCtx context.Context, msg *types.MsgRepayLoan) (*t
 		return nil, sdkerrors.Wrapf(types.ErrWrongLoanState, "loan is not in the correct state for this action, loan is in %s state. Needs to be in approved", loan.State)
 	}
 
-	lender, _ := sdk.AccAddressFromBech32(loan.Lender)
 	borrower, _ := sdk.AccAddressFromBech32(loan.Borrower)
 	if msg.Creator != loan.Borrower {
 		return nil, sdkerrors.Wrap(types.ErrUnauthorized, "Cannot repay: not the borrower")
@@ -30,20 +29,36 @@ func (k msgServer) RepayLoan(goCtx context.Context, msg *types.MsgRepayLoan) (*t
 
 	// grab necessary coins from borrower and send to lender
 	amount, _ := sdk.ParseCoinsNormalized(loan.Amount)
-	fee, _ := sdk.ParseCoinsNormalized(loan.Fee)
 	collateral, _ := sdk.ParseCoinsNormalized(loan.Collateral)
+	collateralPrice := k.TypedLoan(ctx, collateral)
+	// add balance checks to make sure borrower has enough to repay
 
+	// calculate interest 1% of loan amount a year: (block current - block start) * (1/blocks in a year)
+	// until we have a better way to calculate block time set to standard
+	// need a big Int to do math on coins amount
+	divisor := sdkmath.NewInt(1000)
+	multiplier := sdkmath.NewInt(10)
+	interest := amount[0].Amount.Mul(multiplier).Quo(divisor)
+	interestPayment := sdk.NewCoin("usdc", interest)
+
+	totalCollateral := collateral[0].Amount.Mul(sdk.NewInt(int64(collateralPrice.Price))).Mul(types.Cwei)
+
+	// type it to coin
+	totalCollateralCoin := sdk.NewCoin(collateral[0].Denom, totalCollateral)
+
+	errR := k.bankKeeper.SendCoinsFromAccountToModule(ctx, borrower, types.ModuleName, sdk.NewCoins(interestPayment))
+	if errR != nil {
+		return nil, errR
+	}
 	// send coins out to and from appropriate accounts
-	err := k.bankKeeper.SendCoins(ctx, borrower, lender, amount)
-	if err != nil {
-		return nil, err
+	// keeper burn function takes back zusd to burn keep interest out of the burn function
+	errK := k.BurnTokens(ctx, borrower, sdk.NewCoin("zusd", amount[0].Amount))
+	if errK != nil {
+		return nil, errK
 	}
-	err = k.bankKeeper.SendCoins(ctx, borrower, lender, fee)
-	if err != nil {
-		return nil, err
-	}
+
 	// collateral is sent back to the borrower from the module not the lender
-	err = k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, borrower, collateral)
+	err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, borrower, sdk.NewCoins(totalCollateralCoin))
 	if err != nil {
 		return nil, err
 	}

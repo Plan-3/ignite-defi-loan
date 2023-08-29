@@ -12,5 +12,5 @@ message Loan {
   string state = 6; 
   string borrower = 7; 
   string lender = 8; 
-  
+  int64 timestamp = 9; 
 }

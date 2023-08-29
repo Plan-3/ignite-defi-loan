@@ -51,6 +51,14 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgBurnToken int = 100
 
+	opWeightMsgRedeem = "op_weight_msg_redeem"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgRedeem int = 100
+
+	opWeightMsgStake = "op_weight_msg_stake"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgStake int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -156,6 +164,28 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		loansimulation.SimulateMsgBurnToken(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgRedeem int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgRedeem, &weightMsgRedeem, nil,
+		func(_ *rand.Rand) {
+			weightMsgRedeem = defaultWeightMsgRedeem
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgRedeem,
+		loansimulation.SimulateMsgRedeem(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgStake int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgStake, &weightMsgStake, nil,
+		func(_ *rand.Rand) {
+			weightMsgStake = defaultWeightMsgStake
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgStake,
+		loansimulation.SimulateMsgStake(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -217,6 +247,22 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgBurnToken,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				loansimulation.SimulateMsgBurnToken(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgRedeem,
+			defaultWeightMsgRedeem,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				loansimulation.SimulateMsgRedeem(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgStake,
+			defaultWeightMsgStake,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				loansimulation.SimulateMsgStake(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

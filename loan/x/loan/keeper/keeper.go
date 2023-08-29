@@ -86,3 +86,30 @@ func (k Keeper) BurnTokens(ctx sdk.Context, receiver sdk.AccAddress, tokens sdk.
 
 	return nil
 }
+
+func (k Keeper) TypedLoan(ctx sdk.Context, token sdk.Coins) *types.TokenPrice {
+	// set up pointer to TokenPrice collateral price
+	collateralPrice := &types.TokenPrice{}
+
+	// switch on denom string to set parsed coin t a type TokenPrice{sdk.Coin, int}
+	switch token[0].Denom {
+	case "ctz":
+		collateralPrice.Denom = token[0]
+		collateralPrice.Price = 1800
+		break
+	case "cqt":
+		collateralPrice.Denom = token[0]
+		collateralPrice.Price = 100
+		break
+	default:
+		break
+	}
+	return collateralPrice
+}
+
+/*
+add more keeper methods need one for
+calculating risk,
+one for calculating collateral in terms of cwei,
+and one for calculating interest
+*/
