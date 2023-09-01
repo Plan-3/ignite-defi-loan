@@ -10,7 +10,7 @@ import (
 )
 
 var (
-	moduleAccountLoan = "cosmos1gu4m79yj8ch8em7c22vzt3qparg69ymm75qf6l"
+	ModuleAccountLoan = "cosmos1gu4m79yj8ch8em7c22vzt3qparg69ymm75qf6l"
 	blackList         = make(map[string]bool)
 )
 
@@ -94,7 +94,7 @@ func (k msgServer) RequestLoan(goCtx context.Context, msg *types.MsgRequestLoan)
 		}
 
 		// append loan to store
-		loan.Lender = moduleAccountLoan
+		loan.Lender = ModuleAccountLoan
 		loan.State = "approved"
 		k.AppendLoan(ctx, loan)
 		return &types.MsgRequestLoanResponse{}, nil

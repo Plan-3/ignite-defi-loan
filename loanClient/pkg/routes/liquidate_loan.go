@@ -68,11 +68,9 @@ func LiquidateLoan(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	fmt.Println(block)
-	// Account `alice` was initialized during `ignite chain serve`
-	accountName := "bob"
 	
 	// Get account from the keyring
-	account, err := client.Account(accountName)
+	account, err := client.Account(msg.Creator)
 	if err != nil {
 		log.Fatal(err)
 	}

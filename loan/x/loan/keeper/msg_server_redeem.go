@@ -72,7 +72,7 @@ func (k msgServer) Redeem(goCtx context.Context, msg *types.MsgRedeem) (*types.M
 	// formula workaround for no decimals 1 billion / price * amount
 	totalCollateral := types.Cwei.Mul(dollarTotalCollateral)
 	redeemerAmount := types.Cwei.Mul(collateral[0].Amount).Quo(dollarTotalCollateral).Mul(amount[0].Amount)
-	toCoin := sdk.NewCoin(collateral[0].Denom, redeemerAmount)
+	toCoin := sdk.NewCoin(collateral[0].Denom, redeemerAmount.MulRaw(95).QuoRaw(100))
 	remainderAmount := totalCollateral.Sub(redeemerAmount)
 	toCoinRemainder := sdk.NewCoin(collateral[0].Denom, remainderAmount)
 	// burn amount from module

@@ -3,7 +3,6 @@ package routes
 import (
 	"context"
 	"fmt"
-	"log"
 	"net/http"
 	"io/ioutil"
 	"encoding/json"
@@ -60,21 +59,21 @@ func RepayLoan(w http.ResponseWriter, r *http.Request) {
 	// Create a Cosmos client instance
 	client, err := cosmosclient.New(ctx, cosmosclient.WithAddressPrefix(addressPrefix))
 	if err != nil {
-		log.Error(err)
+		fmt.Print(err)
 	}
 	
 	
 	// Get account from the keyring
 	account, err := client.Account(msg.Creator)
 	if err != nil {
-		log.Error(err)
+		fmt.Print(err)
 	}
 
 	// Broadcast a transaction from account `msg.creator` with the message
   // to create a post store response in txResp
   txResp, err := client.BroadcastTx(ctx, account, msg)
   if err != nil {
-      log.Error(err)
+      fmt.Print(err)
     }
 
     // Print response from broadcasting a transaction
@@ -87,7 +86,7 @@ func RepayLoan(w http.ResponseWriter, r *http.Request) {
 
     queryResp, err := queryClient.LoanAll(ctx, &types.QueryAllLoanRequest{})
     if err != nil {
-        log.Error(err)
+        fmt.Print(err)
     }
 
     fmt.Print("\n\nAll loans:\n\n")

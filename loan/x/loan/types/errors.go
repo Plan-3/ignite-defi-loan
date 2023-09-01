@@ -13,4 +13,5 @@ var (
 	ErrInvalidRequest = sdkerrors.Register(ModuleName, 3, "invalid request")
 	ErrUnauthorized   = sdkerrors.Register(ModuleName, 4, "unauthorized for this request")
 	ErrDeadline       = sdkerrors.Register(ModuleName, 5, "deadline not reached")
+	ErrNoStake        = sdkerrors.Register(ModuleName, 6, "no stake found with this address")
 )

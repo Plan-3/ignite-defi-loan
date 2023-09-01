@@ -8,6 +8,7 @@ import (
 	storetypes "github.com/cosmos/cosmos-sdk/store/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	paramtypes "github.com/cosmos/cosmos-sdk/x/params/types"
+	banktypes "github.com/cosmos/cosmos-sdk/x/bank/types"
 
 	"loan/x/loan/types"
 )
@@ -105,6 +106,51 @@ func (k Keeper) TypedLoan(ctx sdk.Context, token sdk.Coins) *types.TokenPrice {
 		break
 	}
 	return collateralPrice
+}
+
+func (k Keeper) ModuleStakingAmounts(ctx sdk.Context) (sdk.Int, sdk.Int, sdk.Int, sdk.Coins) {
+
+	ModuleAccountToAddress, _ := sdk.AccAddressFromBech32("cosmos1gu4m79yj8ch8em7c22vzt3qparg69ymm75qf6l")
+
+
+	// type the module account to type Balance
+	// Balance has getAddress and getCoins methods
+	moduleBalances := k.bankKeeper.GetAccountsBalances(ctx)
+	var loanModule banktypes.Balance
+	for _, accounts := range moduleBalances {
+		if accounts.GetAddress().Equals(ModuleAccountToAddress) {
+			loanModule = accounts
+		}
+	}
+
+	moduleCoins := loanModule.GetCoins()
+
+	// set up variables to hold collateral prices and total zusd in bank vault at time of deposit
+	ctzPrice := sdk.NewInt(0)
+	cqtPrice := sdk.NewInt(0)
+	zusdTotalAtTimeOfDeposit := sdk.NewInt(0)
+
+	// loop through all coins in module account i.e. bank vault 
+	// get price of collateral coins 
+	// get total zusd in bank vault at time of deposit
+	// will need to add new cases as new collaterals are accepted
+	for _, coin := range moduleCoins {
+		switch coin.Denom {
+		case "ctz":
+			collateralPrice := k.TypedLoan(ctx, sdk.NewCoins(coin))
+			ctzPrice = coin.Amount.Quo(types.Cwei).MulRaw(int64(collateralPrice.Price))
+			break
+		case "cqt":
+			collateralPrice := k.TypedLoan(ctx, sdk.NewCoins(coin))
+			cqtPrice = coin.Amount.Quo(types.Cwei).MulRaw(int64(collateralPrice.Price))
+			break
+		case "zusd":
+			zusdTotalAtTimeOfDeposit = zusdTotalAtTimeOfDeposit.Add(coin.Amount)
+			break
+		}
+	}
+
+	return ctzPrice, cqtPrice, zusdTotalAtTimeOfDeposit, moduleCoins
 }
 
 /*
