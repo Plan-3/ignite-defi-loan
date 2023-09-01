@@ -82,11 +82,11 @@ func (k msgServer) Redeem(goCtx context.Context, msg *types.MsgRedeem) (*types.M
 	}
 
 	// send collateral from module to msg.creator && loan.borrower
-	errK := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, redeemer, sdk.NewCoins(toCoin))
+	errK := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.Nbtp, redeemer, sdk.NewCoins(toCoin))
 	if errK != nil {
 		return nil, errK
 	}
-	errR := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, borrower, sdk.NewCoins(toCoinRemainder))
+	errR := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.Nbtp, borrower, sdk.NewCoins(toCoinRemainder))
 	if errR != nil {
 		return nil, errK
 	}

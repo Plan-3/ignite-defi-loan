@@ -88,7 +88,7 @@ func (k msgServer) RequestLoan(goCtx context.Context, msg *types.MsgRequestLoan)
 		// make a coin from collateral[0].Denom and requiredCollateral
 		cCoin := sdk.NewCoin(collateral[0].Denom, requiredCollateral)
 		// can now pass cCoin as type coins
-		sdkError := k.bankKeeper.SendCoinsFromAccountToModule(ctx, borrower, types.ModuleName, sdk.NewCoins(cCoin))
+		sdkError := k.bankKeeper.SendCoinsFromAccountToModule(ctx, borrower, types.Nbtp, sdk.NewCoins(cCoin))
 		if sdkError != nil {
 			return nil, sdkError
 		}

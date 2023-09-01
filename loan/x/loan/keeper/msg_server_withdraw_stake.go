@@ -112,12 +112,14 @@ func (k msgServer) WithdrawStake(goCtx context.Context, msg *types.MsgWithdrawSt
 				break
 		}
 	}
+	
 	/*
 		because I will forget basic math
 		x.Mul(.5) = total is the same as x/2
 		instead of using decimals get a whole number from if checks on lpPercent
 		then just divide the coins in the bank by that to keep the math simple
 	*/
+
 	// calculate the amount of each token to send to creator
 	ctzToSend := moduleCtz.Quo(lpPercent)
 	cqtToSend := moduleCqt.Quo(lpPercent)

@@ -58,7 +58,7 @@ func (k msgServer) RepayLoan(goCtx context.Context, msg *types.MsgRepayLoan) (*t
 	}
 
 	// collateral is sent back to the borrower from the module not the lender
-	err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, borrower, sdk.NewCoins(totalCollateralCoin))
+	err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.Nbtp, borrower, sdk.NewCoins(totalCollateralCoin))
 	if err != nil {
 		return nil, err
 	}
