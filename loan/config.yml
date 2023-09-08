@@ -5,6 +5,7 @@ accounts:
   - 100000000000000000000ctz
   - 100000000000000000000usdc
   - 10000000000000000000cstk
+  mnemonic: fire expand radio cargo trust swap swear stereo reduce middle illegal surprise
 - name: vault
   coins:
   - 10000000000000000000cstk

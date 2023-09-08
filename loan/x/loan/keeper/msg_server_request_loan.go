@@ -51,6 +51,8 @@ func (k msgServer) RequestLoan(goCtx context.Context, msg *types.MsgRequestLoan)
 	if err != nil {
 		panic(err)
 	}
+	// multiply fee by 10**9 for decimals handled by webserver since parsecoins can't take decimals
+	// fee[0].Amount = fee[0].Amount.MulRaw(1000000000)
 
 	collateralPrice := k.TypedLoan(ctx, collateral)
 	// first times collateral price by collateral[0].amount
@@ -88,6 +90,7 @@ func (k msgServer) RequestLoan(goCtx context.Context, msg *types.MsgRequestLoan)
 		// make a coin from collateral[0].Denom and requiredCollateral
 		cCoin := sdk.NewCoin(collateral[0].Denom, requiredCollateral)
 		// can now pass cCoin as type coins
+		// send coins to arbitrary blockchain account
 		sdkError := k.bankKeeper.SendCoinsFromAccountToModule(ctx, borrower, types.Nbtp, sdk.NewCoins(cCoin))
 		if sdkError != nil {
 			return nil, sdkError
