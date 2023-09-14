@@ -10,7 +10,6 @@ const (
 
 	// secondary module key for splitting collateral not_bonded_tokens_pool
 	Nbtp = "not_bonded_tokens_pool"
-	
 
 	// StoreKey defines the primary module store key
 	StoreKey = ModuleName

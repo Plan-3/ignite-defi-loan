@@ -22,7 +22,6 @@ func (k msgServer) Stake(goCtx context.Context, msg *types.MsgStake) (*types.Msg
 	// check keeper.go for the function
 	ctzPrice, cqtPrice, zusdTotalAtTimeOfDeposit, _ := k.ModuleStakingAmounts(ctx)
 
-
 	// create coins based on the amounts from loop
 	zusdPlaceHolder := sdk.NewCoin("zPh", zusdTotalAtTimeOfDeposit)
 	collateralPlaceHolder := sdk.NewCoin("cPh", ctzPrice.Add(cqtPrice))

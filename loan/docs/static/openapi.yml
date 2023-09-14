@@ -2638,6 +2638,8 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  loan.loan.MsgAddCollateralResponse:
+    type: object
   loan.loan.MsgApproveLoanResponse:
     type: object
   loan.loan.MsgBurnTokenResponse:
@@ -2655,6 +2657,8 @@ definitions:
   loan.loan.MsgStakeResponse:
     type: object
   loan.loan.MsgTokenMintResponse:
+    type: object
+  loan.loan.MsgWithdrawPartialResponse:
     type: object
   loan.loan.MsgWithdrawStakeResponse:
     type: object

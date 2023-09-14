@@ -14,4 +14,5 @@ var (
 	ErrUnauthorized   = sdkerrors.Register(ModuleName, 4, "unauthorized for this request")
 	ErrDeadline       = sdkerrors.Register(ModuleName, 5, "deadline not reached")
 	ErrNoStake        = sdkerrors.Register(ModuleName, 6, "no stake found with this address")
+	ErrNotBorrower    = sdkerrors.Register(ModuleName, 7, "Can't add or withdraw if you are not the borrower")
 )

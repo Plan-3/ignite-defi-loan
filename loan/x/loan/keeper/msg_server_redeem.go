@@ -65,15 +65,11 @@ func (k msgServer) Redeem(goCtx context.Context, msg *types.MsgRedeem) (*types.M
 	amount, _ := sdk.ParseCoinsNormalized(loan.Amount)
 	collateral, _ := sdk.ParseCoinsNormalized(loan.Collateral)
 
-	collateralPrice := k.TypedLoan(ctx, collateral)
-
-	// grab the dollar amount of the collateral
-	dollarTotalCollateral := collateral[0].Amount.Mul(sdk.NewInt(int64(collateralPrice.Price)))
-	// formula workaround for no decimals 1 billion / price * amount
-	totalCollateral := types.Cwei.Mul(dollarTotalCollateral)
-	redeemerAmount := types.Cwei.Mul(collateral[0].Amount).Quo(dollarTotalCollateral).Mul(amount[0].Amount)
-	toCoin := sdk.NewCoin(collateral[0].Denom, redeemerAmount.MulRaw(95).QuoRaw(100))
-	remainderAmount := totalCollateral.Sub(redeemerAmount)
+	// the dollar amount of the collateral is handled in request loan 
+	// as well as all the nano amounts
+	redeemerAmount := collateral[0].Amount.MulRaw(95).QuoRaw(100)
+	toCoin := sdk.NewCoin(collateral[0].Denom, redeemerAmount)
+	remainderAmount := collateral[0].Amount.Sub(redeemerAmount)
 	toCoinRemainder := sdk.NewCoin(collateral[0].Denom, remainderAmount)
 	// burn amount from module
 	errB := k.BurnTokens(ctx, redeemer, sdk.NewCoin("zusd", amount[0].Amount))

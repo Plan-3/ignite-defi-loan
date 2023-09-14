@@ -19,7 +19,7 @@ import (
 
 )
 
-func convertDecimalAmount(amount string) (string, error) {
+func ConvertDecimalAmount(amount string) (string, error) {
 	// Use regular expression to split the input string into number and string parts
 	re := regexp.MustCompile(`^([0-9.]+)([A-Za-z]+)$`)
 	matches := re.FindStringSubmatch(amount)
@@ -86,7 +86,7 @@ func CreateLoan(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Failed to unmarshal json into json struct", 500)
 	}
 
-	request.Fee, err = convertDecimalAmount(request.Fee)
+	request.Fee, err = ConvertDecimalAmount(request.Fee)
 	if err != nil {
 		http.Error(w, "Failed to convert fee", 500)
 	}

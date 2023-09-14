@@ -16,9 +16,8 @@ func (k msgServer) WithdrawStake(goCtx context.Context, msg *types.MsgWithdrawSt
 	creator, _ := sdk.AccAddressFromBech32(msg.Creator)
 	amount := k.bankKeeper.GetAllBalances(ctx, creator)
 
-	// check keeper.go for the function 
+	// check keeper.go for the function
 	ctzPrice, cqtPrice, zusdTotalAtTimeOfWithdrawal, moduleCoins := k.ModuleStakingAmounts(ctx)
-
 
 	// set up variables to hold token amounts
 	cphToken := sdk.NewInt(0)
@@ -28,15 +27,15 @@ func (k msgServer) WithdrawStake(goCtx context.Context, msg *types.MsgWithdrawSt
 	// loop through all coins in personal account
 	for _, coin := range amount {
 		switch coin.Denom {
-			case "cPh":
-				cphToken = coin.Amount
-				break
-			case "zPh":
-				zphToken = coin.Amount
-				break
-			case "posi":
-				posiTokenAmount = coin.Amount
-				break
+		case "cPh":
+			cphToken = coin.Amount
+			break
+		case "zPh":
+			zphToken = coin.Amount
+			break
+		case "posi":
+			posiTokenAmount = coin.Amount
+			break
 		}
 	}
 
@@ -48,20 +47,20 @@ func (k msgServer) WithdrawStake(goCtx context.Context, msg *types.MsgWithdrawSt
 	zToken := sdk.NewCoin("zPh", zphToken)
 	positionCoin := sdk.NewCoin("posi", posiTokenAmount)
 
-		// loop through all coins in personal account
-		for _, coin := range amount {
-			switch coin.Denom {
-				case "cPh":
-					k.BurnTokens(ctx, creator, cToken)
-					break
-				case "zPh":
-					k.BurnTokens(ctx, creator, zToken)
-					break
-				case "posi":
-					k.BurnTokens(ctx, creator, positionCoin)
-					break
-			}
+	// loop through all coins in personal account
+	for _, coin := range amount {
+		switch coin.Denom {
+		case "cPh":
+			k.BurnTokens(ctx, creator, cToken)
+			break
+		case "zPh":
+			k.BurnTokens(ctx, creator, zToken)
+			break
+		case "posi":
+			k.BurnTokens(ctx, creator, positionCoin)
+			break
 		}
+	}
 	/*
 		calculate the lp % based on three conditions
 		if zusd in pool is greater than the zToken amount run position/(current zusd in module + position)
@@ -76,13 +75,12 @@ func (k msgServer) WithdrawStake(goCtx context.Context, msg *types.MsgWithdrawSt
 	if zusdTotalAtTimeOfWithdrawal.GT(zphToken) {
 		lpPercent = zusdTotalAtTimeOfWithdrawal.Add(posiTokenAmount).Quo(posiTokenAmount)
 	}
-	if zusdTotalAtTimeOfWithdrawal.LT(zphToken) && ctzPrice.Add(cqtPrice).GT(cphToken){
+	if zusdTotalAtTimeOfWithdrawal.LT(zphToken) && ctzPrice.Add(cqtPrice).GT(cphToken) {
 		lpPercent = zphToken.Add(posiTokenAmount).Quo(posiTokenAmount)
 	}
-	if zusdTotalAtTimeOfWithdrawal.LT(zphToken) && ctzPrice.Add(cqtPrice).LT(cphToken){
-		lpPercent = zusdTotalAtTimeOfWithdrawal.Add(posiTokenAmount).Quo(posiTokenAmount)	
+	if zusdTotalAtTimeOfWithdrawal.LT(zphToken) && ctzPrice.Add(cqtPrice).LT(cphToken) {
+		lpPercent = zusdTotalAtTimeOfWithdrawal.Add(posiTokenAmount).Quo(posiTokenAmount)
 	}
-
 
 	// /*
 	// 	need to calculate coin percentages of all collateral tokens in pool and zusd
@@ -90,7 +88,7 @@ func (k msgServer) WithdrawStake(goCtx context.Context, msg *types.MsgWithdrawSt
 	// 	type to Dec
 	// 	multiply by lpPercent
 	// 	reconvert to Int
-	// 	create coin from Int as amount 
+	// 	create coin from Int as amount
 	// 	send coins to creator
 	// */
 
@@ -101,18 +99,18 @@ func (k msgServer) WithdrawStake(goCtx context.Context, msg *types.MsgWithdrawSt
 
 	for _, coin := range moduleCoins {
 		switch coin.Denom {
-			case "ctz":
-				moduleCtz = coin.Amount
-				break
-			case "cqt":
-				moduleCqt = coin.Amount
-				break
-			case "zusd":
-				moduleZusd = coin.Amount
-				break
+		case "ctz":
+			moduleCtz = coin.Amount
+			break
+		case "cqt":
+			moduleCqt = coin.Amount
+			break
+		case "zusd":
+			moduleZusd = coin.Amount
+			break
 		}
 	}
-	
+
 	/*
 		because I will forget basic math
 		x.Mul(.5) = total is the same as x/2
@@ -124,7 +122,6 @@ func (k msgServer) WithdrawStake(goCtx context.Context, msg *types.MsgWithdrawSt
 	ctzToSend := moduleCtz.Quo(lpPercent)
 	cqtToSend := moduleCqt.Quo(lpPercent)
 	zusdToSend := moduleZusd.Quo(lpPercent)
-
 
 	// create coins from Int
 	ctzCoin := sdk.NewCoin("ctz", ctzToSend)

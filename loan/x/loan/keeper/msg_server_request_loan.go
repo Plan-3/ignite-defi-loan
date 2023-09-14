@@ -56,9 +56,9 @@ func (k msgServer) RequestLoan(goCtx context.Context, msg *types.MsgRequestLoan)
 
 	collateralPrice := k.TypedLoan(ctx, collateral)
 	// first times collateral price by collateral[0].amount
-	dollarAmountC := collateral[0].Amount.MulRaw(int64(collateralPrice.Price))
 	// times dollar amount by 1 billion to get the amount needed in ctz to send
-	requiredCollateral := types.Cwei.Mul(dollarAmountC)
+	requiredCollateral := types.Cwei.Mul(collateral[0].Amount)
+
 
 	sdkError2 := k.bankKeeper.SendCoinsFromAccountToModule(ctx, borrower, types.ModuleName, fee)
 	if sdkError2 != nil {
@@ -99,6 +99,8 @@ func (k msgServer) RequestLoan(goCtx context.Context, msg *types.MsgRequestLoan)
 		// append loan to store
 		loan.Lender = ModuleAccountLoan
 		loan.State = "approved"
+		loan.Amount = sdk.NewCoin("zusd", amount[0].Amount).String()
+		loan.Collateral = cCoin.String()
 		k.AppendLoan(ctx, loan)
 		return &types.MsgRequestLoanResponse{}, nil
 

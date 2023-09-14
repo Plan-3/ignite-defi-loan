@@ -63,6 +63,14 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgWithdrawStake int = 100
 
+	opWeightMsgAddCollateral = "op_weight_msg_add_collateral"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgAddCollateral int = 100
+
+	opWeightMsgWithdrawPartial = "op_weight_msg_withdraw_partial"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgWithdrawPartial int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -201,6 +209,28 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		loansimulation.SimulateMsgWithdrawStake(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
+	var weightMsgAddCollateral int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgAddCollateral, &weightMsgAddCollateral, nil,
+		func(_ *rand.Rand) {
+			weightMsgAddCollateral = defaultWeightMsgAddCollateral
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgAddCollateral,
+		loansimulation.SimulateMsgAddCollateral(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgWithdrawPartial int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgWithdrawPartial, &weightMsgWithdrawPartial, nil,
+		func(_ *rand.Rand) {
+			weightMsgWithdrawPartial = defaultWeightMsgWithdrawPartial
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgWithdrawPartial,
+		loansimulation.SimulateMsgWithdrawPartial(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
 	// this line is used by starport scaffolding # simapp/module/operation
 
 	return operations
@@ -286,6 +316,22 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgWithdrawStake,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				loansimulation.SimulateMsgWithdrawStake(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgAddCollateral,
+			defaultWeightMsgAddCollateral,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				loansimulation.SimulateMsgAddCollateral(am.accountKeeper, am.bankKeeper, am.keeper)
+				return nil
+			},
+		),
+		simulation.NewWeightedProposalMsg(
+			opWeightMsgWithdrawPartial,
+			defaultWeightMsgWithdrawPartial,
+			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
+				loansimulation.SimulateMsgWithdrawPartial(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

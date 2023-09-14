@@ -18,6 +18,8 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgRedeem{}, "loan/Redeem", nil)
 	cdc.RegisterConcrete(&MsgStake{}, "loan/Stake", nil)
 	cdc.RegisterConcrete(&MsgWithdrawStake{}, "loan/WithdrawStake", nil)
+	cdc.RegisterConcrete(&MsgAddCollateral{}, "loan/AddCollateral", nil)
+	cdc.RegisterConcrete(&MsgWithdrawPartial{}, "loan/WithdrawPartial", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -51,6 +53,12 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgWithdrawStake{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgAddCollateral{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgWithdrawPartial{},
 	)
 	// this line is used by starport scaffolding # 3
 

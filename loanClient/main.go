@@ -39,6 +39,8 @@ func main() {
     r.HandleFunc("/approveloan", routes.ApproveLoan).Methods("POST")
     r.HandleFunc("/liquidateloan", routes.LiquidateLoan).Methods("POST")
     r.HandleFunc("/repayloan", routes.RepayLoan).Methods("POST")
+    r.HandleFunc("/addcollateral", routes.AddCollateral).Methods("POST")
+    r.HandleFunc("/withdrawpartial", routes.WithdrawPartial).Methods("POST")
     // check if api key is valid
     // r.Use(utils.ApiMiddleWare)
     // Create a new cors handler with the desired CORS options

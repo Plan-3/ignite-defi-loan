@@ -9,16 +9,18 @@ option go_package = "loan/x/loan/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc RequestLoan   (MsgRequestLoan  ) returns (MsgRequestLoanResponse  );
-  rpc ApproveLoan   (MsgApproveLoan  ) returns (MsgApproveLoanResponse  );
-  rpc RepayLoan     (MsgRepayLoan    ) returns (MsgRepayLoanResponse    );
-  rpc LiquidateLoan (MsgLiquidateLoan) returns (MsgLiquidateLoanResponse);
-  rpc CancelLoan    (MsgCancelLoan   ) returns (MsgCancelLoanResponse   );
-  rpc TokenMint     (MsgTokenMint    ) returns (MsgTokenMintResponse    );
-  rpc BurnToken     (MsgBurnToken    ) returns (MsgBurnTokenResponse    );
-  rpc Redeem        (MsgRedeem       ) returns (MsgRedeemResponse       );
-  rpc Stake         (MsgStake        ) returns (MsgStakeResponse        );
-  rpc WithdrawStake (MsgWithdrawStake) returns (MsgWithdrawStakeResponse);
+  rpc RequestLoan     (MsgRequestLoan    ) returns (MsgRequestLoanResponse    );
+  rpc ApproveLoan     (MsgApproveLoan    ) returns (MsgApproveLoanResponse    );
+  rpc RepayLoan       (MsgRepayLoan      ) returns (MsgRepayLoanResponse      );
+  rpc LiquidateLoan   (MsgLiquidateLoan  ) returns (MsgLiquidateLoanResponse  );
+  rpc CancelLoan      (MsgCancelLoan     ) returns (MsgCancelLoanResponse     );
+  rpc TokenMint       (MsgTokenMint      ) returns (MsgTokenMintResponse      );
+  rpc BurnToken       (MsgBurnToken      ) returns (MsgBurnTokenResponse      );
+  rpc Redeem          (MsgRedeem         ) returns (MsgRedeemResponse         );
+  rpc Stake           (MsgStake          ) returns (MsgStakeResponse          );
+  rpc WithdrawStake   (MsgWithdrawStake  ) returns (MsgWithdrawStakeResponse  );
+  rpc AddCollateral   (MsgAddCollateral  ) returns (MsgAddCollateralResponse  );
+  rpc WithdrawPartial (MsgWithdrawPartial) returns (MsgWithdrawPartialResponse);
 }
 message MsgRequestLoan {
   string creator    = 1;
@@ -82,8 +84,8 @@ message MsgRedeem {
 message MsgRedeemResponse {}
 
 message MsgStake {
-  string creator         = 1;
-  string amount          = 2;
+  string creator = 1;
+  string amount  = 2;
 }
 
 message MsgStakeResponse {}
@@ -93,4 +95,20 @@ message MsgWithdrawStake {
 }
 
 message MsgWithdrawStakeResponse {}
+
+message MsgAddCollateral {
+  string creator = 1;
+  uint64 id      = 2;
+  string amount  = 3;
+}
+
+message MsgAddCollateralResponse {}
+
+message MsgWithdrawPartial {
+  string creator = 1;
+  uint64 id      = 2;
+  string amount  = 3;
+}
+
+message MsgWithdrawPartialResponse {}
 

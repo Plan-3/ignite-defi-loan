@@ -30,21 +30,16 @@ func (k msgServer) RepayLoan(goCtx context.Context, msg *types.MsgRepayLoan) (*t
 	// grab necessary coins from borrower and send to lender
 	amount, _ := sdk.ParseCoinsNormalized(loan.Amount)
 	collateral, _ := sdk.ParseCoinsNormalized(loan.Collateral)
-	collateralPrice := k.TypedLoan(ctx, collateral)
 	// add balance checks to make sure borrower has enough to repay
 
 	// calculate interest 1% of loan amount a year: (block current - block start) * (1/blocks in a year)
 	// until we have a better way to calculate block time set to standard
 	// need a big Int to do math on coins amount
-	divisor := sdkmath.NewInt(1000)
-	multiplier := sdkmath.NewInt(10)
+	divisor := sdkmath.NewInt(100)
+	multiplier := sdkmath.NewInt(1)
 	interest := amount[0].Amount.Mul(multiplier).Quo(divisor)
-	interestPayment := sdk.NewCoin("usdc", interest)
+	interestPayment := sdk.NewCoin("usdc", interest.Mul(types.Cwei))
 
-	totalCollateral := collateral[0].Amount.Mul(sdk.NewInt(int64(collateralPrice.Price))).Mul(types.Cwei)
-
-	// type it to coin
-	totalCollateralCoin := sdk.NewCoin(collateral[0].Denom, totalCollateral)
 
 	errR := k.bankKeeper.SendCoinsFromAccountToModule(ctx, borrower, types.ModuleName, sdk.NewCoins(interestPayment))
 	if errR != nil {
@@ -58,7 +53,7 @@ func (k msgServer) RepayLoan(goCtx context.Context, msg *types.MsgRepayLoan) (*t
 	}
 
 	// collateral is sent back to the borrower from the module not the lender
-	err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.Nbtp, borrower, sdk.NewCoins(totalCollateralCoin))
+	err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.Nbtp, borrower, collateral)
 	if err != nil {
 		return nil, err
 	}

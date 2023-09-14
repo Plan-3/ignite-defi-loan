@@ -34,13 +34,10 @@ func (k msgServer) LiquidateLoan(goCtx context.Context, msg *types.MsgLiquidateL
 	borrower, _ := sdk.AccAddressFromBech32(loan.Borrower)
 	collateral, _ := sdk.ParseCoinsNormalized(loan.Collateral)
 	amount, _ := sdk.ParseCoinsNormalized(loan.Amount)
-	
+
 	// burn 99% of collateral
-	collateralPrice := k.TypedLoan(ctx, collateral)
-	collateralAmount := collateral[0].Amount.Mul(sdk.NewInt(int64(collateralPrice.Price)))
-	collateralTotal := types.Cwei.Mul(collateralAmount)
-	collateralBurn := collateralTotal.MulRaw(99).QuoRaw(100)
-	collateralLiquidatedToPool := collateralTotal.Sub(collateralBurn)
+	collateralBurn := collateral[0].Amount.MulRaw(99).QuoRaw(100)
+	collateralLiquidatedToPool := collateral[0].Amount.Sub(collateralBurn)
 	// convert to sdk.Coin to send to burn coins
 	burnCoin := sdk.NewCoin(collateral[0].Denom, collateralBurn)
 	liquidatedCollateral := sdk.NewCoin(collateral[0].Denom, collateralLiquidatedToPool)
@@ -50,19 +47,17 @@ func (k msgServer) LiquidateLoan(goCtx context.Context, msg *types.MsgLiquidateL
 		return nil, errB
 	}
 	// for time being force zusd back from borrower to loan module to burn
-	errB1 := k.bankKeeper.SendCoinsFromAccountToModule(ctx, borrower, types.ModuleName, sdk.NewCoins(burnZusd))
+	errB1 := k.BurnTokens(ctx, borrower, burnZusd)
 	if errB1 != nil {
 		return nil, errB1
 	}
-	errB2 := k.bankKeeper.BurnCoins(ctx, types.ModuleName, sdk.NewCoins(burnZusd))
-	if errB2 != nil {
-		return nil, errB2
-	}
+
+	// send collateral from holding account to pool
 	errS := k.bankKeeper.SendCoinsFromModuleToModule(ctx, types.Nbtp, types.ModuleName, sdk.NewCoins(liquidatedCollateral))
 	if errS != nil {
 		return nil, errS
 	}
-	
+
 	loan.State = "liquidated"
 	k.SetLoan(ctx, loan)
 
