@@ -86,6 +86,8 @@ func CreateLoan(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Failed to unmarshal json into json struct", 500)
 	}
 
+
+	// convert fee using ConvertDecimalAmount which is local function
 	request.Fee, err = ConvertDecimalAmount(request.Fee)
 	if err != nil {
 		http.Error(w, "Failed to convert fee", 500)
@@ -119,41 +121,10 @@ func CreateLoan(w http.ResponseWriter, r *http.Request) {
 		log.Print(err)
 	}
 	
-	// Account `alice` was initialized during `ignite chain serve`
-	// can be name or address
-	
-	/* Get account from the keyring
-	accountName := r.Body.Creator
-	// Account returns the account with name or address equal to nameOrAddress.
-func (c Client) Account(nameOrAddress string) (cosmosaccount.Account, error) {
-	defer c.lockBech32Prefix()()
-
-	acc, err := c.AccountRegistry.GetByName(nameOrAddress)
-	if err == nil {
-		return acc, nil
-	}
-	return c.AccountRegistry.GetByAddress(nameOrAddress)
-}
-
-// Address returns the account address from account name.
-func (c Client) Address(accountName string) (string, error) {
-	a, err := c.AccountRegistry.GetByName(accountName)
+	account, err := client.Account(msg.Creator)
 	if err != nil {
-		return "", err
+		log.Print(err)
 	}
-	return a.Address(c.addressPrefix)
-}
-
-
-addr, err := account.Address(addressPrefix)
-if err != nil {
-	log.Print(err)
-}
-*/
-account, err := client.Account(msg.Creator)
-if err != nil {
-	log.Print(err)
-}
 
 	// Broadcast a transaction from account `alice` with the message
   // to create a post store response in txResp
@@ -162,27 +133,8 @@ if err != nil {
       log.Print(err)
     }
 
-    // Print response from broadcasting a transaction
-    fmt.Print("MsgCreateLoan:\n\n")
-    fmt.Println(txResp)
-
-    // Instantiate a query client for your `blog` blockchain
-    queryClient := types.NewQueryClient(client.Context())
-
-    // Query the blockchain using the client's `PostAll` method
-    // to get all posts store all posts in queryResp
-    queryResp, err := queryClient.LoanAll(ctx, &types.QueryAllLoanRequest{})
-    if err != nil {
-        log.Print(err)
-    }
-
-    // Print response from querying all the posts
-    fmt.Print("\n\nAll loans:\n\n")
-    fmt.Println(queryResp)
-		fmt.Println(ctx)
-
-
-
-    // Respond with a 200 status to indicate that preflight request is allowed
-    w.WriteHeader(http.StatusOK)
+		res, _ := json.Marshal(txResp)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write(res)
 }

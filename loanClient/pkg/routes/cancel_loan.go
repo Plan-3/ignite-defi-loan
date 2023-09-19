@@ -87,30 +87,8 @@ func CancelLoan(w http.ResponseWriter, r *http.Request) {
       log.Fatal(err)
     }
 
-    // Print response from broadcasting a transaction
-    fmt.Print("MsgCreateLoan:\n\n")
-    fmt.Println(txResp)
-
-    // Instantiate a query client for your `blog` blockchain
-    queryClient := types.NewQueryClient(client.Context())
-
-    // Query the blockchain using the client's `Loan` method in query_loan
-    // set up a pointer to type like create loan
-
-		loanreq := &types.QueryGetLoanRequest{}
-
-		errRequest := json.Unmarshal(body, loanreq)
-		if errRequest != nil {
-			http.Error(w, "Failed to unmarshal json", 500)
-			return
-		}
-
-    queryResp, err := queryClient.Loan(ctx, loanreq)
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    // Print response from querying all the posts
-    fmt.Print("\n\nAll loans:\n\n")
-    fmt.Println(queryResp)
+  res, _ := json.Marshal(txResp)
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(res)
 }

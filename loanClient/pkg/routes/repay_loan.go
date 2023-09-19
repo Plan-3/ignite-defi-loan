@@ -76,19 +76,8 @@ func RepayLoan(w http.ResponseWriter, r *http.Request) {
       fmt.Print(err)
     }
 
-    // Print response from broadcasting a transaction
-    fmt.Print("MsgRepayLoan:\n\n")
-    fmt.Println(txResp)
-
-    // Instantiate a query client for your `blog` blockchain
-    queryClient := types.NewQueryClient(client.Context())
-
-
-    queryResp, err := queryClient.LoanAll(ctx, &types.QueryAllLoanRequest{})
-    if err != nil {
-        fmt.Print(err)
-    }
-
-    fmt.Print("\n\nAll loans:\n\n")
-    fmt.Printf("%T", queryResp)
+		res, _ := json.Marshal(txResp)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write(res)
 }

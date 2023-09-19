@@ -55,7 +55,8 @@ func Stake(w http.ResponseWriter, r *http.Request) {
 		log.Print(err)
 	}
 
-	_ = txResp
-
+	res, _ := json.Marshal(txResp)
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
+	w.Write(res)
 }
