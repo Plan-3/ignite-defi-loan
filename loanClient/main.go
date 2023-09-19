@@ -45,7 +45,7 @@ func main() {
     // r.Use(utils.ApiMiddleWare)
     // Create a new cors handler with the desired CORS options
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://localhost:3000", "http://localhost:3000/loan"}, // Replace with your Next.js app domain
+		AllowedOrigins: []string{"http://localhost:3000", "http://localhost:3000/loan", "http://localhost:3000/account"}, // Replace with your Next.js app domain
 		AllowedMethods: []string{"GET", "POST", "OPTIONS"}, // Allow desired HTTP methods
 		AllowedHeaders: []string{"*"}, // Allow any headers from the client
 	})

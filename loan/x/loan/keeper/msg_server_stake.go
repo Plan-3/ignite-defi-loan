@@ -27,30 +27,17 @@ func (k msgServer) Stake(goCtx context.Context, msg *types.MsgStake) (*types.Msg
 	collateralPlaceHolder := sdk.NewCoin("cPh", ctzPrice.Add(cqtPrice))
 	positionCoin := sdk.NewCoin("posi", amount[0].Amount)
 
-	errZ := k.bankKeeper.MintCoins(ctx, types.ModuleName, sdk.NewCoins(zusdPlaceHolder))
+	errZ := k.MintTokens(ctx, creator, zusdPlaceHolder)
 	if errZ != nil {
 		return nil, errZ
 	}
-	errC := k.bankKeeper.MintCoins(ctx, types.ModuleName, sdk.NewCoins(collateralPlaceHolder))
+	errC := k.MintTokens(ctx, creator, collateralPlaceHolder)
 	if errC != nil {
 		return nil, errC
 	}
-	errP := k.bankKeeper.MintCoins(ctx, types.ModuleName, sdk.NewCoins(positionCoin))
+	errP := k.MintTokens(ctx, creator, positionCoin)
 	if errP != nil {
 		return nil, errP
-	}
-
-	errSZ := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, creator, sdk.NewCoins(zusdPlaceHolder))
-	if errSZ != nil {
-		return nil, errSZ
-	}
-	errSC := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, creator, sdk.NewCoins(collateralPlaceHolder))
-	if errSC != nil {
-		return nil, errSC
-	}
-	errSP := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.ModuleName, creator, sdk.NewCoins(positionCoin))
-	if errSP != nil {
-		return nil, errSP
 	}
 
 	return &types.MsgStakeResponse{}, nil

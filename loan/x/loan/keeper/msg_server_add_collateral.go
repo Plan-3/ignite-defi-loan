@@ -38,12 +38,13 @@ func (k msgServer) AddCollateral(goCtx context.Context, msg *types.MsgAddCollate
 		return nil, sdkerrors.Wrap(types.ErrInvalidRequest, "Can't parse collateral")
 	}
 
-	addition := collateral[0].Amount.Add(amount[0].Amount)
+	getCwei := amount[0].Amount.Mul(types.Cwei)
+
+	addition := collateral[0].Amount.Add(getCwei)
 
 	// updated collateral
 	newCollateral := sdk.NewCoin(collateral[0].Denom, addition)
 
-	getCwei := amount[0].Amount.MulRaw(int64(1000000000))
 
 	cCoin := sdk.NewCoin(amount[0].Denom, getCwei)
 

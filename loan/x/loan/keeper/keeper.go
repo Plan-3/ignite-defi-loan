@@ -136,15 +136,13 @@ func (k Keeper) ModuleStakingAmounts(ctx sdk.Context) (sdk.Int, sdk.Int, sdk.Int
 	for _, coin := range moduleCoins {
 		switch coin.Denom {
 		case "ctz":
-			collateralPrice := k.TypedLoan(ctx, sdk.NewCoins(coin))
-			ctzPrice = coin.Amount.Quo(types.Cwei).MulRaw(int64(collateralPrice.Price))
+			ctzPrice = coin.Amount
 			break
 		case "cqt":
-			collateralPrice := k.TypedLoan(ctx, sdk.NewCoins(coin))
-			cqtPrice = coin.Amount.Quo(types.Cwei).MulRaw(int64(collateralPrice.Price))
+			cqtPrice = coin.Amount
 			break
 		case "zusd":
-			zusdTotalAtTimeOfDeposit = zusdTotalAtTimeOfDeposit.Add(coin.Amount)
+			zusdTotalAtTimeOfDeposit = coin.Amount
 			break
 		}
 	}

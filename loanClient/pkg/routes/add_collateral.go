@@ -48,7 +48,7 @@ func AddCollateral(w http.ResponseWriter, r *http.Request) {
 	err = json.Unmarshal(body, msg)
 	if err != nil {
 		http.Error(w, "Failed to unmarshal json", 500)
-		return
+		return 
 	}	
 	
 

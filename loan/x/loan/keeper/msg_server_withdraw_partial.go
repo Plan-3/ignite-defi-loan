@@ -1,11 +1,9 @@
 
-/*
 package keeper
 
 import (
 	"context"
 
-	sdkmath "cosmossdk.io/math"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 	"loan/x/loan/types"
@@ -48,14 +46,15 @@ func (k msgServer) WithdrawPartial(goCtx context.Context, msg *types.MsgWithdraw
 	/*
 	handle this on webserver first 
 	!!! look into dec coins !!! may require rewriting all code
+	handled ^ all coins in cwei units 10e-9 except zusd\
+	formatted on client side
+	*/
 	
-	// get collateral price
-	price := k.TypedLoan(ctx, amount)
-	
-	// get the amount of cwei coins by * message by price
-	// eg .5 webserver 10**9 = 500000000 * 1800 = 900000000000
-	dollarAmount := amount[0].Amount.MulRaw(int64(price.Price))
-	collateralPrice := collateral[0].Amount.MulRaw(int64(price.Price))
+
+	// collateral and amount should be in cwei units already 
+	// add to var for easier use
+	dollarAmount := amount[0].Amount
+	collateralPrice := collateral[0].Amount
 	
 	// get first part of fraction
 	// eg 1800000000000 / 900000000000 = 2
@@ -74,7 +73,7 @@ func (k msgServer) WithdrawPartial(goCtx context.Context, msg *types.MsgWithdraw
 	ztsbCoin := sdk.NewCoin("zusd", zusdToSendBack)
 	
 	// burn the zusd
-	err2 := k.bankKeeper.BurnCoins(ctx, types.ModuleName, sdk.NewCoins(ztsbCoin))
+	err2 := k.BurnTokens(ctx, borrower, ztsbCoin)
 	if err2 != nil {
 		return nil, err2
 	}
@@ -89,32 +88,13 @@ func (k msgServer) WithdrawPartial(goCtx context.Context, msg *types.MsgWithdraw
 	newLoanAmount := loanAmount[0].Amount.Sub(zusdToSendBack)
 	newLoanAmountCoin := sdk.NewCoin("zusd", newLoanAmount)
 	loan.Amount = newLoanAmountCoin.String()
-	newCollateralAmount := (collateralPrice.Sub(dollarAmount)).Quo(price.Price)
+	newCollateralAmount := collateralPrice.Sub(dollarAmount)
 	// to legacy decimal
-	cDecAmount := newCollateralAmount.Quo(sdk.NewInt(1000000000))
-	newCollateralAmountCoin := sdk.NewDecCoin(collateral[0].Denom, cDecAmount)
+	newCollateralAmountCoin := sdk.NewDecCoin(collateral[0].Denom, newCollateralAmount)
 	loan.Collateral = newCollateralAmountCoin.String()
 	
 	// store updated loan values
 	k.SetLoan(ctx, loan)
 	
-	return &types.MsgWithdrawPartialResponse{}, nil
-}
-*/
-
-package keeper 
-
-import (
-	"context"
-
-	sdk "github.com/cosmos/cosmos-sdk/types"
-	"loan/x/loan/types"
-)
-
-func (k msgServer) WithdrawPartial(goCtx context.Context, msg *types.MsgWithdrawPartial) (*types.MsgWithdrawPartialResponse, error) {
-	ctx := sdk.UnwrapSDKContext(goCtx)
-	// TODO: Handling the message
-	_ = ctx
-
 	return &types.MsgWithdrawPartialResponse{}, nil
 }
