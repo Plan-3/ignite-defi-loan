@@ -61,9 +61,8 @@ func (k msgServer) Redeem(goCtx context.Context, msg *types.MsgRedeem) (*types.M
 
 	// parse account from msg.Creator
 	redeemer, _ := sdk.AccAddressFromBech32(msg.Creator)
-	borrower, _ := sdk.AccAddressFromBech32(loan.Borrower)
-	amount, _ := sdk.ParseCoinsNormalized(loan.Amount)
-	collateral, _ := sdk.ParseCoinsNormalized(loan.Collateral)
+
+	collateral, amount, borrower := k.GetLoanContent(ctx, loan)
 
 	// the dollar amount of the collateral is handled in request loan 
 	// as well as all the nano amounts

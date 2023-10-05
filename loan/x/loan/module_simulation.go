@@ -110,17 +110,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 		loansimulation.SimulateMsgRequestLoan(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
-	var weightMsgApproveLoan int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgApproveLoan, &weightMsgApproveLoan, nil,
-		func(_ *rand.Rand) {
-			weightMsgApproveLoan = defaultWeightMsgApproveLoan
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgApproveLoan,
-		loansimulation.SimulateMsgApproveLoan(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
 	var weightMsgRepayLoan int
 	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgRepayLoan, &weightMsgRepayLoan, nil,
 		func(_ *rand.Rand) {
@@ -152,28 +141,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgCancelLoan,
 		loansimulation.SimulateMsgCancelLoan(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgTokenMint int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgTokenMint, &weightMsgTokenMint, nil,
-		func(_ *rand.Rand) {
-			weightMsgTokenMint = defaultWeightMsgTokenMint
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgTokenMint,
-		loansimulation.SimulateMsgTokenMint(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgBurnToken int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgBurnToken, &weightMsgBurnToken, nil,
-		func(_ *rand.Rand) {
-			weightMsgBurnToken = defaultWeightMsgBurnToken
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgBurnToken,
-		loansimulation.SimulateMsgBurnToken(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	var weightMsgRedeem int
@@ -248,14 +215,6 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			},
 		),
 		simulation.NewWeightedProposalMsg(
-			opWeightMsgApproveLoan,
-			defaultWeightMsgApproveLoan,
-			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				loansimulation.SimulateMsgApproveLoan(am.accountKeeper, am.bankKeeper, am.keeper)
-				return nil
-			},
-		),
-		simulation.NewWeightedProposalMsg(
 			opWeightMsgRepayLoan,
 			defaultWeightMsgRepayLoan,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
@@ -276,22 +235,6 @@ func (am AppModule) ProposalMsgs(simState module.SimulationState) []simtypes.Wei
 			defaultWeightMsgCancelLoan,
 			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
 				loansimulation.SimulateMsgCancelLoan(am.accountKeeper, am.bankKeeper, am.keeper)
-				return nil
-			},
-		),
-		simulation.NewWeightedProposalMsg(
-			opWeightMsgTokenMint,
-			defaultWeightMsgTokenMint,
-			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				loansimulation.SimulateMsgTokenMint(am.accountKeeper, am.bankKeeper, am.keeper)
-				return nil
-			},
-		),
-		simulation.NewWeightedProposalMsg(
-			opWeightMsgBurnToken,
-			defaultWeightMsgBurnToken,
-			func(r *rand.Rand, ctx sdk.Context, accs []simtypes.Account) sdk.Msg {
-				loansimulation.SimulateMsgBurnToken(am.accountKeeper, am.bankKeeper, am.keeper)
 				return nil
 			},
 		),

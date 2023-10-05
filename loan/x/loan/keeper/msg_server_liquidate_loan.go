@@ -16,7 +16,7 @@ func (k msgServer) LiquidateLoan(goCtx context.Context, msg *types.MsgLiquidateL
 	// TODO: Handling the message
 	loan, found := k.GetLoan(ctx, msg.Id)
 
-	// convert deadline to int to compare to block height
+	// convert deadline to int to compare to block height ParseInt(string, base, bitSize)
 	deadline, err := strconv.ParseInt(loan.Deadline, 10, 64)
 	if err != nil {
 		panic(err)
@@ -31,9 +31,8 @@ func (k msgServer) LiquidateLoan(goCtx context.Context, msg *types.MsgLiquidateL
 		return nil, sdkerrors.Wrapf(types.ErrWrongLoanState, "%v", loan.State)
 	}
 
-	borrower, _ := sdk.AccAddressFromBech32(loan.Borrower)
-	collateral, _ := sdk.ParseCoinsNormalized(loan.Collateral)
-	amount, _ := sdk.ParseCoinsNormalized(loan.Amount)
+	// returns are in order: collateral coins, amount coins, borrower address
+	collateral, amount, borrower := k.GetLoanContent(ctx, loan)
 
 	// burn 99% of collateral
 	collateralBurn := collateral[0].Amount.MulRaw(99).QuoRaw(100)

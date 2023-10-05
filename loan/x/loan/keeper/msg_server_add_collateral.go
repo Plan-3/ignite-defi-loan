@@ -11,7 +11,6 @@ import (
 func (k msgServer) AddCollateral(goCtx context.Context, msg *types.MsgAddCollateral) (*types.MsgAddCollateralResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
 	// retrieve loan to approve k is the msgServer object getLoan is a method of a keeper
 	loan, found := k.GetLoan(ctx, msg.Id)
 	if !found {
@@ -22,21 +21,7 @@ func (k msgServer) AddCollateral(goCtx context.Context, msg *types.MsgAddCollate
 		return nil, sdkerrors.Wrapf(types.ErrWrongLoanState, "loan %d is not in requested state", msg.Id)
 	}
 
-	// get borrower account
-	borrower, _ := sdk.AccAddressFromBech32(loan.Borrower)
-	if loan.Borrower != msg.Creator {
-		return nil, sdkerrors.Wrap(types.ErrNotBorrower, "You are not borrower")
-	}
-	// get loan amount
-	amount, err := sdk.ParseCoinsNormalized(msg.Amount)
-	if err != nil {
-		return nil, sdkerrors.Wrap(types.ErrInvalidRequest, "Can't parse loan amount")
-	}
-	// get collateral
-	collateral, err := sdk.ParseCoinsNormalized(loan.Collateral)
-	if err != nil {
-		return nil, sdkerrors.Wrap(types.ErrInvalidRequest, "Can't parse collateral")
-	}
+	collateral, amount, borrower := k.GetLoanContent(ctx, loan)
 
 	getCwei := amount[0].Amount.Mul(types.Cwei)
 

@@ -10,12 +10,9 @@ option go_package = "loan/x/loan/types";
 // Msg defines the Msg service.
 service Msg {
   rpc RequestLoan     (MsgRequestLoan    ) returns (MsgRequestLoanResponse    );
-  rpc ApproveLoan     (MsgApproveLoan    ) returns (MsgApproveLoanResponse    );
   rpc RepayLoan       (MsgRepayLoan      ) returns (MsgRepayLoanResponse      );
   rpc LiquidateLoan   (MsgLiquidateLoan  ) returns (MsgLiquidateLoanResponse  );
   rpc CancelLoan      (MsgCancelLoan     ) returns (MsgCancelLoanResponse     );
-  rpc TokenMint       (MsgTokenMint      ) returns (MsgTokenMintResponse      );
-  rpc BurnToken       (MsgBurnToken      ) returns (MsgBurnTokenResponse      );
   rpc Redeem          (MsgRedeem         ) returns (MsgRedeemResponse         );
   rpc Stake           (MsgStake          ) returns (MsgStakeResponse          );
   rpc WithdrawStake   (MsgWithdrawStake  ) returns (MsgWithdrawStakeResponse  );
@@ -32,12 +29,6 @@ message MsgRequestLoan {
 
 message MsgRequestLoanResponse {}
 
-message MsgApproveLoan {
-  string creator = 1;
-  uint64 id      = 2;
-}
-
-message MsgApproveLoanResponse {}
 
 message MsgRepayLoan {
   string creator = 1;
@@ -59,22 +50,6 @@ message MsgCancelLoan {
 }
 
 message MsgCancelLoanResponse {}
-
-message MsgTokenMint {
-  string creator     = 1;
-  string denom       = 2;
-  int64  denomAmount = 3;
-}
-
-message MsgTokenMintResponse {}
-
-message MsgBurnToken {
-  string creator = 1;
-  string denom   = 2;
-  int64  amount  = 3;
-}
-
-message MsgBurnTokenResponse {}
 
 message MsgRedeem {
   string creator = 1;

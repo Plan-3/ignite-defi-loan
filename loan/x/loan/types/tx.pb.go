@@ -141,94 +141,6 @@ func (m *MsgRequestLoanResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgRequestLoanResponse proto.InternalMessageInfo
 
-type MsgApproveLoan struct {
-	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Id      uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (m *MsgApproveLoan) Reset()         { *m = MsgApproveLoan{} }
-func (m *MsgApproveLoan) String() string { return proto.CompactTextString(m) }
-func (*MsgApproveLoan) ProtoMessage()    {}
-func (*MsgApproveLoan) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{2}
-}
-func (m *MsgApproveLoan) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgApproveLoan) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgApproveLoan.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgApproveLoan) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgApproveLoan.Merge(m, src)
-}
-func (m *MsgApproveLoan) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgApproveLoan) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgApproveLoan.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgApproveLoan proto.InternalMessageInfo
-
-func (m *MsgApproveLoan) GetCreator() string {
-	if m != nil {
-		return m.Creator
-	}
-	return ""
-}
-
-func (m *MsgApproveLoan) GetId() uint64 {
-	if m != nil {
-		return m.Id
-	}
-	return 0
-}
-
-type MsgApproveLoanResponse struct {
-}
-
-func (m *MsgApproveLoanResponse) Reset()         { *m = MsgApproveLoanResponse{} }
-func (m *MsgApproveLoanResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgApproveLoanResponse) ProtoMessage()    {}
-func (*MsgApproveLoanResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{3}
-}
-func (m *MsgApproveLoanResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgApproveLoanResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgApproveLoanResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgApproveLoanResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgApproveLoanResponse.Merge(m, src)
-}
-func (m *MsgApproveLoanResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgApproveLoanResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgApproveLoanResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgApproveLoanResponse proto.InternalMessageInfo
-
 type MsgRepayLoan struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Id      uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -238,7 +150,7 @@ func (m *MsgRepayLoan) Reset()         { *m = MsgRepayLoan{} }
 func (m *MsgRepayLoan) String() string { return proto.CompactTextString(m) }
 func (*MsgRepayLoan) ProtoMessage()    {}
 func (*MsgRepayLoan) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{4}
+	return fileDescriptor_a914cc78de7d0204, []int{2}
 }
 func (m *MsgRepayLoan) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -288,7 +200,7 @@ func (m *MsgRepayLoanResponse) Reset()         { *m = MsgRepayLoanResponse{} }
 func (m *MsgRepayLoanResponse) String() string { return proto.CompactTextString(m) }
 func (*MsgRepayLoanResponse) ProtoMessage()    {}
 func (*MsgRepayLoanResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{5}
+	return fileDescriptor_a914cc78de7d0204, []int{3}
 }
 func (m *MsgRepayLoanResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -326,7 +238,7 @@ func (m *MsgLiquidateLoan) Reset()         { *m = MsgLiquidateLoan{} }
 func (m *MsgLiquidateLoan) String() string { return proto.CompactTextString(m) }
 func (*MsgLiquidateLoan) ProtoMessage()    {}
 func (*MsgLiquidateLoan) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{6}
+	return fileDescriptor_a914cc78de7d0204, []int{4}
 }
 func (m *MsgLiquidateLoan) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -376,7 +288,7 @@ func (m *MsgLiquidateLoanResponse) Reset()         { *m = MsgLiquidateLoanRespon
 func (m *MsgLiquidateLoanResponse) String() string { return proto.CompactTextString(m) }
 func (*MsgLiquidateLoanResponse) ProtoMessage()    {}
 func (*MsgLiquidateLoanResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{7}
+	return fileDescriptor_a914cc78de7d0204, []int{5}
 }
 func (m *MsgLiquidateLoanResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -414,7 +326,7 @@ func (m *MsgCancelLoan) Reset()         { *m = MsgCancelLoan{} }
 func (m *MsgCancelLoan) String() string { return proto.CompactTextString(m) }
 func (*MsgCancelLoan) ProtoMessage()    {}
 func (*MsgCancelLoan) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{8}
+	return fileDescriptor_a914cc78de7d0204, []int{6}
 }
 func (m *MsgCancelLoan) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -464,7 +376,7 @@ func (m *MsgCancelLoanResponse) Reset()         { *m = MsgCancelLoanResponse{} }
 func (m *MsgCancelLoanResponse) String() string { return proto.CompactTextString(m) }
 func (*MsgCancelLoanResponse) ProtoMessage()    {}
 func (*MsgCancelLoanResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{9}
+	return fileDescriptor_a914cc78de7d0204, []int{7}
 }
 func (m *MsgCancelLoanResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -493,198 +405,6 @@ func (m *MsgCancelLoanResponse) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_MsgCancelLoanResponse proto.InternalMessageInfo
 
-type MsgTokenMint struct {
-	Creator     string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Denom       string `protobuf:"bytes,2,opt,name=denom,proto3" json:"denom,omitempty"`
-	DenomAmount int64  `protobuf:"varint,3,opt,name=denomAmount,proto3" json:"denomAmount,omitempty"`
-}
-
-func (m *MsgTokenMint) Reset()         { *m = MsgTokenMint{} }
-func (m *MsgTokenMint) String() string { return proto.CompactTextString(m) }
-func (*MsgTokenMint) ProtoMessage()    {}
-func (*MsgTokenMint) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{10}
-}
-func (m *MsgTokenMint) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgTokenMint) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgTokenMint.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgTokenMint) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgTokenMint.Merge(m, src)
-}
-func (m *MsgTokenMint) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgTokenMint) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgTokenMint.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgTokenMint proto.InternalMessageInfo
-
-func (m *MsgTokenMint) GetCreator() string {
-	if m != nil {
-		return m.Creator
-	}
-	return ""
-}
-
-func (m *MsgTokenMint) GetDenom() string {
-	if m != nil {
-		return m.Denom
-	}
-	return ""
-}
-
-func (m *MsgTokenMint) GetDenomAmount() int64 {
-	if m != nil {
-		return m.DenomAmount
-	}
-	return 0
-}
-
-type MsgTokenMintResponse struct {
-}
-
-func (m *MsgTokenMintResponse) Reset()         { *m = MsgTokenMintResponse{} }
-func (m *MsgTokenMintResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgTokenMintResponse) ProtoMessage()    {}
-func (*MsgTokenMintResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{11}
-}
-func (m *MsgTokenMintResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgTokenMintResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgTokenMintResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgTokenMintResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgTokenMintResponse.Merge(m, src)
-}
-func (m *MsgTokenMintResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgTokenMintResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgTokenMintResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgTokenMintResponse proto.InternalMessageInfo
-
-type MsgBurnToken struct {
-	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
-	Denom   string `protobuf:"bytes,2,opt,name=denom,proto3" json:"denom,omitempty"`
-	Amount  int64  `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`
-}
-
-func (m *MsgBurnToken) Reset()         { *m = MsgBurnToken{} }
-func (m *MsgBurnToken) String() string { return proto.CompactTextString(m) }
-func (*MsgBurnToken) ProtoMessage()    {}
-func (*MsgBurnToken) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{12}
-}
-func (m *MsgBurnToken) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgBurnToken) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgBurnToken.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgBurnToken) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgBurnToken.Merge(m, src)
-}
-func (m *MsgBurnToken) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgBurnToken) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgBurnToken.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgBurnToken proto.InternalMessageInfo
-
-func (m *MsgBurnToken) GetCreator() string {
-	if m != nil {
-		return m.Creator
-	}
-	return ""
-}
-
-func (m *MsgBurnToken) GetDenom() string {
-	if m != nil {
-		return m.Denom
-	}
-	return ""
-}
-
-func (m *MsgBurnToken) GetAmount() int64 {
-	if m != nil {
-		return m.Amount
-	}
-	return 0
-}
-
-type MsgBurnTokenResponse struct {
-}
-
-func (m *MsgBurnTokenResponse) Reset()         { *m = MsgBurnTokenResponse{} }
-func (m *MsgBurnTokenResponse) String() string { return proto.CompactTextString(m) }
-func (*MsgBurnTokenResponse) ProtoMessage()    {}
-func (*MsgBurnTokenResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{13}
-}
-func (m *MsgBurnTokenResponse) XXX_Unmarshal(b []byte) error {
-	return m.Unmarshal(b)
-}
-func (m *MsgBurnTokenResponse) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	if deterministic {
-		return xxx_messageInfo_MsgBurnTokenResponse.Marshal(b, m, deterministic)
-	} else {
-		b = b[:cap(b)]
-		n, err := m.MarshalToSizedBuffer(b)
-		if err != nil {
-			return nil, err
-		}
-		return b[:n], nil
-	}
-}
-func (m *MsgBurnTokenResponse) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_MsgBurnTokenResponse.Merge(m, src)
-}
-func (m *MsgBurnTokenResponse) XXX_Size() int {
-	return m.Size()
-}
-func (m *MsgBurnTokenResponse) XXX_DiscardUnknown() {
-	xxx_messageInfo_MsgBurnTokenResponse.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_MsgBurnTokenResponse proto.InternalMessageInfo
-
 type MsgRedeem struct {
 	Creator string `protobuf:"bytes,1,opt,name=creator,proto3" json:"creator,omitempty"`
 	Id      uint64 `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
@@ -694,7 +414,7 @@ func (m *MsgRedeem) Reset()         { *m = MsgRedeem{} }
 func (m *MsgRedeem) String() string { return proto.CompactTextString(m) }
 func (*MsgRedeem) ProtoMessage()    {}
 func (*MsgRedeem) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{14}
+	return fileDescriptor_a914cc78de7d0204, []int{8}
 }
 func (m *MsgRedeem) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -744,7 +464,7 @@ func (m *MsgRedeemResponse) Reset()         { *m = MsgRedeemResponse{} }
 func (m *MsgRedeemResponse) String() string { return proto.CompactTextString(m) }
 func (*MsgRedeemResponse) ProtoMessage()    {}
 func (*MsgRedeemResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{15}
+	return fileDescriptor_a914cc78de7d0204, []int{9}
 }
 func (m *MsgRedeemResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -782,7 +502,7 @@ func (m *MsgStake) Reset()         { *m = MsgStake{} }
 func (m *MsgStake) String() string { return proto.CompactTextString(m) }
 func (*MsgStake) ProtoMessage()    {}
 func (*MsgStake) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{16}
+	return fileDescriptor_a914cc78de7d0204, []int{10}
 }
 func (m *MsgStake) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -832,7 +552,7 @@ func (m *MsgStakeResponse) Reset()         { *m = MsgStakeResponse{} }
 func (m *MsgStakeResponse) String() string { return proto.CompactTextString(m) }
 func (*MsgStakeResponse) ProtoMessage()    {}
 func (*MsgStakeResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{17}
+	return fileDescriptor_a914cc78de7d0204, []int{11}
 }
 func (m *MsgStakeResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -869,7 +589,7 @@ func (m *MsgWithdrawStake) Reset()         { *m = MsgWithdrawStake{} }
 func (m *MsgWithdrawStake) String() string { return proto.CompactTextString(m) }
 func (*MsgWithdrawStake) ProtoMessage()    {}
 func (*MsgWithdrawStake) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{18}
+	return fileDescriptor_a914cc78de7d0204, []int{12}
 }
 func (m *MsgWithdrawStake) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -912,7 +632,7 @@ func (m *MsgWithdrawStakeResponse) Reset()         { *m = MsgWithdrawStakeRespon
 func (m *MsgWithdrawStakeResponse) String() string { return proto.CompactTextString(m) }
 func (*MsgWithdrawStakeResponse) ProtoMessage()    {}
 func (*MsgWithdrawStakeResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{19}
+	return fileDescriptor_a914cc78de7d0204, []int{13}
 }
 func (m *MsgWithdrawStakeResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -951,7 +671,7 @@ func (m *MsgAddCollateral) Reset()         { *m = MsgAddCollateral{} }
 func (m *MsgAddCollateral) String() string { return proto.CompactTextString(m) }
 func (*MsgAddCollateral) ProtoMessage()    {}
 func (*MsgAddCollateral) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{20}
+	return fileDescriptor_a914cc78de7d0204, []int{14}
 }
 func (m *MsgAddCollateral) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1008,7 +728,7 @@ func (m *MsgAddCollateralResponse) Reset()         { *m = MsgAddCollateralRespon
 func (m *MsgAddCollateralResponse) String() string { return proto.CompactTextString(m) }
 func (*MsgAddCollateralResponse) ProtoMessage()    {}
 func (*MsgAddCollateralResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{21}
+	return fileDescriptor_a914cc78de7d0204, []int{15}
 }
 func (m *MsgAddCollateralResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1047,7 +767,7 @@ func (m *MsgWithdrawPartial) Reset()         { *m = MsgWithdrawPartial{} }
 func (m *MsgWithdrawPartial) String() string { return proto.CompactTextString(m) }
 func (*MsgWithdrawPartial) ProtoMessage()    {}
 func (*MsgWithdrawPartial) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{22}
+	return fileDescriptor_a914cc78de7d0204, []int{16}
 }
 func (m *MsgWithdrawPartial) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1104,7 +824,7 @@ func (m *MsgWithdrawPartialResponse) Reset()         { *m = MsgWithdrawPartialRe
 func (m *MsgWithdrawPartialResponse) String() string { return proto.CompactTextString(m) }
 func (*MsgWithdrawPartialResponse) ProtoMessage()    {}
 func (*MsgWithdrawPartialResponse) Descriptor() ([]byte, []int) {
-	return fileDescriptor_a914cc78de7d0204, []int{23}
+	return fileDescriptor_a914cc78de7d0204, []int{17}
 }
 func (m *MsgWithdrawPartialResponse) XXX_Unmarshal(b []byte) error {
 	return m.Unmarshal(b)
@@ -1136,18 +856,12 @@ var xxx_messageInfo_MsgWithdrawPartialResponse proto.InternalMessageInfo
 func init() {
 	proto.RegisterType((*MsgRequestLoan)(nil), "loan.loan.MsgRequestLoan")
 	proto.RegisterType((*MsgRequestLoanResponse)(nil), "loan.loan.MsgRequestLoanResponse")
-	proto.RegisterType((*MsgApproveLoan)(nil), "loan.loan.MsgApproveLoan")
-	proto.RegisterType((*MsgApproveLoanResponse)(nil), "loan.loan.MsgApproveLoanResponse")
 	proto.RegisterType((*MsgRepayLoan)(nil), "loan.loan.MsgRepayLoan")
 	proto.RegisterType((*MsgRepayLoanResponse)(nil), "loan.loan.MsgRepayLoanResponse")
 	proto.RegisterType((*MsgLiquidateLoan)(nil), "loan.loan.MsgLiquidateLoan")
 	proto.RegisterType((*MsgLiquidateLoanResponse)(nil), "loan.loan.MsgLiquidateLoanResponse")
 	proto.RegisterType((*MsgCancelLoan)(nil), "loan.loan.MsgCancelLoan")
 	proto.RegisterType((*MsgCancelLoanResponse)(nil), "loan.loan.MsgCancelLoanResponse")
-	proto.RegisterType((*MsgTokenMint)(nil), "loan.loan.MsgTokenMint")
-	proto.RegisterType((*MsgTokenMintResponse)(nil), "loan.loan.MsgTokenMintResponse")
-	proto.RegisterType((*MsgBurnToken)(nil), "loan.loan.MsgBurnToken")
-	proto.RegisterType((*MsgBurnTokenResponse)(nil), "loan.loan.MsgBurnTokenResponse")
 	proto.RegisterType((*MsgRedeem)(nil), "loan.loan.MsgRedeem")
 	proto.RegisterType((*MsgRedeemResponse)(nil), "loan.loan.MsgRedeemResponse")
 	proto.RegisterType((*MsgStake)(nil), "loan.loan.MsgStake")
@@ -1163,50 +877,43 @@ func init() {
 func init() { proto.RegisterFile("loan/loan/tx.proto", fileDescriptor_a914cc78de7d0204) }
 
 var fileDescriptor_a914cc78de7d0204 = []byte{
-	// 681 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x96, 0xdd, 0x4e, 0xd4, 0x40,
-	0x14, 0xc7, 0x59, 0x96, 0xaf, 0x3d, 0x08, 0xc2, 0xb0, 0x42, 0x1d, 0xb0, 0xe2, 0x1a, 0x13, 0x13,
-	0xcd, 0x6e, 0xd0, 0x98, 0x88, 0xe1, 0x06, 0x88, 0x89, 0x89, 0x6c, 0xa2, 0x2b, 0x91, 0xc4, 0x2b,
-	0x87, 0xed, 0x58, 0x1b, 0x76, 0x3b, 0xa5, 0x33, 0x8b, 0xf0, 0x08, 0xde, 0xf1, 0x58, 0x5e, 0x72,
-	0xe9, 0xa5, 0x81, 0x17, 0x31, 0x9d, 0x76, 0xa7, 0x33, 0x43, 0x59, 0x6c, 0xe2, 0x4d, 0x33, 0x73,
-	0xfe, 0x73, 0x7e, 0xe7, 0xcc, 0xc7, 0x39, 0x29, 0xa0, 0x1e, 0x23, 0x61, 0x4b, 0x7e, 0xc4, 0x69,
-	0x33, 0x8a, 0x99, 0x60, 0xa8, 0x96, 0x4c, 0x9b, 0xc9, 0x07, 0xbb, 0x5d, 0xc6, 0xfb, 0x8c, 0xb7,
-	0x0e, 0x09, 0xa7, 0xad, 0x93, 0x8d, 0x43, 0x2a, 0xc8, 0x46, 0xab, 0xcb, 0x82, 0x30, 0x5d, 0x8a,
-	0xeb, 0x3e, 0xf3, 0x99, 0x1c, 0xb6, 0x92, 0x51, 0x6a, 0x6d, 0x9c, 0x57, 0x60, 0xbe, 0xcd, 0xfd,
-	0x0e, 0x3d, 0x1e, 0x50, 0x2e, 0xf6, 0x18, 0x09, 0x91, 0x03, 0xd3, 0xdd, 0x98, 0x12, 0xc1, 0x62,
-	0xa7, 0xb2, 0x5e, 0x79, 0x5a, 0xeb, 0x0c, 0xa7, 0x68, 0x19, 0xa6, 0x48, 0x9f, 0x0d, 0x42, 0xe1,
-	0x8c, 0x4b, 0x21, 0x9b, 0xa1, 0x05, 0xa8, 0x7e, 0xa3, 0xd4, 0xa9, 0x4a, 0x63, 0x32, 0x44, 0x2e,
-	0x40, 0x97, 0xf5, 0x7a, 0x44, 0xd0, 0x98, 0xf4, 0x9c, 0x09, 0x29, 0x68, 0x16, 0x84, 0x61, 0xc6,
-	0xa3, 0xc4, 0xeb, 0x05, 0x21, 0x75, 0x26, 0xa5, 0xaa, 0xe6, 0x0d, 0x07, 0x96, 0xcd, 0x8c, 0x3a,
-	0x94, 0x47, 0x2c, 0xe4, 0xb4, 0xf1, 0x46, 0xe6, 0xba, 0x1d, 0x45, 0x31, 0x3b, 0xa1, 0xb7, 0xe4,
-	0x3a, 0x0f, 0xe3, 0x81, 0x27, 0xf3, 0x9c, 0xe8, 0x8c, 0x07, 0x5e, 0x46, 0xd5, 0x7c, 0x15, 0xf5,
-	0x35, 0xdc, 0x91, 0xf1, 0x22, 0x72, 0x56, 0x92, 0xb9, 0x0c, 0x75, 0xdd, 0x53, 0x11, 0xb7, 0x60,
-	0xa1, 0xcd, 0xfd, 0xbd, 0xe0, 0x78, 0x10, 0x78, 0x44, 0x94, 0xcd, 0x14, 0x83, 0x63, 0x7b, 0x2b,
-	0xf2, 0x26, 0xcc, 0xb5, 0xb9, 0xbf, 0x4b, 0xc2, 0x2e, 0xed, 0x95, 0xc4, 0xae, 0xc0, 0x3d, 0xc3,
-	0x55, 0x31, 0xbf, 0xca, 0xfd, 0xef, 0xb3, 0x23, 0x1a, 0xb6, 0x83, 0x50, 0x8c, 0x40, 0xd6, 0x61,
-	0xd2, 0xa3, 0x21, 0xeb, 0x67, 0xd7, 0x9f, 0x4e, 0xd0, 0x3a, 0xcc, 0xca, 0xc1, 0x76, 0xfa, 0x34,
-	0x92, 0x57, 0x50, 0xed, 0xe8, 0xa6, 0xec, 0x9c, 0x54, 0x04, 0x15, 0xf9, 0xb3, 0x8c, 0xbc, 0x33,
-	0x88, 0x43, 0xa9, 0x95, 0x8e, 0x9c, 0xbf, 0xc7, 0x34, 0x68, 0x36, 0xcb, 0xe2, 0x29, 0xae, 0x8a,
-	0xf7, 0x0a, 0x6a, 0xf2, 0xbe, 0x3c, 0x4a, 0xfb, 0x25, 0x4e, 0x6e, 0x09, 0x16, 0x95, 0x9b, 0x76,
-	0xc7, 0x33, 0x6d, 0xee, 0x7f, 0x12, 0xe4, 0x88, 0x96, 0xaf, 0x98, 0x06, 0x92, 0x2f, 0x44, 0x7a,
-	0x2b, 0xe2, 0x73, 0x69, 0x3b, 0x08, 0xc4, 0x77, 0x2f, 0x26, 0x3f, 0x6e, 0x21, 0x67, 0xaf, 0xc4,
-	0x58, 0xad, 0x48, 0xfb, 0x92, 0xb4, 0xed, 0x79, 0xbb, 0x79, 0xc5, 0xfd, 0xf3, 0x76, 0xad, 0x53,
-	0xcd, 0x73, 0x4e, 0x23, 0x1a, 0x54, 0xed, 0x26, 0x91, 0x96, 0xcd, 0x07, 0x12, 0x8b, 0xe0, 0xbf,
-	0xc4, 0x5c, 0x03, 0x7c, 0x9d, 0x3b, 0x8c, 0xfa, 0xe2, 0xe7, 0x34, 0x54, 0xdb, 0xdc, 0x47, 0xef,
-	0x61, 0x56, 0x6f, 0x60, 0xf7, 0x9b, 0xaa, 0x2b, 0x36, 0xcd, 0x4e, 0x82, 0x1f, 0xdd, 0x28, 0x0d,
-	0xa1, 0x09, 0x4c, 0xef, 0x30, 0x16, 0x4c, 0x93, 0x6c, 0x58, 0x41, 0x6f, 0x41, 0x6f, 0xa1, 0x96,
-	0x37, 0x96, 0x15, 0x3b, 0x78, 0x26, 0xe0, 0x87, 0x37, 0x08, 0x0a, 0xf3, 0x11, 0xe6, 0xcc, 0x6e,
-	0xb2, 0x6a, 0x7a, 0x18, 0x22, 0x7e, 0x3c, 0x42, 0x54, 0xc8, 0x77, 0x00, 0x7a, 0x1b, 0x31, 0x5d,
-	0x72, 0x05, 0xaf, 0xdf, 0xa4, 0xe8, 0x7b, 0xcc, 0x9b, 0x87, 0xb5, 0x47, 0x25, 0xd8, 0x7b, 0xbc,
-	0xd6, 0x0c, 0x12, 0x4c, 0xde, 0x09, 0x2c, 0x8c, 0x12, 0x6c, 0xcc, 0xb5, 0x1a, 0x47, 0x5b, 0x30,
-	0x95, 0x15, 0x78, 0xdd, 0x3e, 0xd5, 0xc4, 0x8a, 0xd7, 0x8a, 0xac, 0xca, 0x7b, 0x13, 0x26, 0xd3,
-	0xc2, 0x5b, 0x32, 0x97, 0x49, 0x23, 0x5e, 0x2d, 0x30, 0xea, 0x77, 0x64, 0xd6, 0xae, 0xb5, 0xda,
-	0x10, 0xed, 0x3b, 0x2a, 0xac, 0xe3, 0x04, 0x69, 0x16, 0xb1, 0x85, 0x34, 0x44, 0x1b, 0x59, 0x58,
-	0xa8, 0xe8, 0x00, 0xee, 0xda, 0x55, 0xfa, 0xa0, 0x38, 0x95, 0x4c, 0xc6, 0x4f, 0x46, 0xca, 0x43,
-	0xf0, 0xce, 0xb3, 0x5f, 0x97, 0x6e, 0xe5, 0xe2, 0xd2, 0xad, 0xfc, 0xb9, 0x74, 0x2b, 0xe7, 0x57,
-	0xee, 0xd8, 0xc5, 0x95, 0x3b, 0xf6, 0xfb, 0xca, 0x1d, 0xfb, 0xb2, 0x28, 0x7f, 0x59, 0x4e, 0xb3,
-	0x3f, 0x97, 0xb3, 0x88, 0xf2, 0xc3, 0x29, 0xf9, 0xf3, 0xf1, 0xf2, 0x6f, 0x00, 0x00, 0x00, 0xff,
-	0xff, 0x50, 0x03, 0xa7, 0xd1, 0xd3, 0x08, 0x00, 0x00,
+	// 565 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xac, 0x95, 0x51, 0x6f, 0xd3, 0x30,
+	0x10, 0xc7, 0x9b, 0x76, 0x2d, 0xeb, 0xc1, 0xc6, 0xe6, 0x95, 0x2e, 0x78, 0x23, 0x8c, 0x20, 0x24,
+	0x24, 0x50, 0xa3, 0x81, 0x90, 0x98, 0xb4, 0x17, 0x98, 0x90, 0x90, 0x58, 0x24, 0x28, 0x88, 0x49,
+	0xbc, 0xb9, 0x89, 0x09, 0x11, 0x69, 0xdc, 0xc5, 0x2e, 0x6c, 0xdf, 0x62, 0x9f, 0x84, 0xcf, 0xc1,
+	0xe3, 0x1e, 0x79, 0x44, 0xed, 0x17, 0x41, 0x71, 0x53, 0x37, 0x0e, 0xe9, 0x4a, 0x25, 0x5e, 0x22,
+	0xfb, 0xfe, 0x77, 0x3f, 0x9f, 0x2f, 0x77, 0x32, 0xa0, 0x88, 0x91, 0xd8, 0x91, 0x1f, 0x71, 0xd6,
+	0x19, 0x24, 0x4c, 0x30, 0xd4, 0x4c, 0xb7, 0x9d, 0xf4, 0x83, 0x2d, 0x8f, 0xf1, 0x3e, 0xe3, 0x4e,
+	0x8f, 0x70, 0xea, 0x7c, 0xdb, 0xef, 0x51, 0x41, 0xf6, 0x1d, 0x8f, 0x85, 0xf1, 0xc4, 0x15, 0xb7,
+	0x02, 0x16, 0x30, 0xb9, 0x74, 0xd2, 0xd5, 0xc4, 0x6a, 0x5f, 0x18, 0xb0, 0xee, 0xf2, 0xa0, 0x4b,
+	0x4f, 0x87, 0x94, 0x8b, 0x63, 0x46, 0x62, 0x64, 0xc2, 0x35, 0x2f, 0xa1, 0x44, 0xb0, 0xc4, 0x34,
+	0xf6, 0x8c, 0x87, 0xcd, 0xee, 0x74, 0x8b, 0xda, 0xd0, 0x20, 0x7d, 0x36, 0x8c, 0x85, 0x59, 0x95,
+	0x42, 0xb6, 0x43, 0x1b, 0x50, 0xfb, 0x4c, 0xa9, 0x59, 0x93, 0xc6, 0x74, 0x89, 0x2c, 0x00, 0x8f,
+	0x45, 0x11, 0x11, 0x34, 0x21, 0x91, 0xb9, 0x22, 0x85, 0x9c, 0x05, 0x61, 0x58, 0xf5, 0x29, 0xf1,
+	0xa3, 0x30, 0xa6, 0x66, 0x5d, 0xaa, 0x6a, 0x6f, 0x9b, 0xd0, 0xd6, 0x33, 0xea, 0x52, 0x3e, 0x60,
+	0x31, 0xa7, 0xf6, 0x73, 0xb8, 0x21, 0x95, 0x01, 0x39, 0x5f, 0x90, 0xe9, 0x3a, 0x54, 0x43, 0x5f,
+	0x66, 0xb9, 0xd2, 0xad, 0x86, 0xbe, 0xdd, 0x86, 0x56, 0x3e, 0x52, 0x11, 0x0f, 0x61, 0xc3, 0xe5,
+	0xc1, 0x71, 0x78, 0x3a, 0x0c, 0x7d, 0x22, 0xe8, 0x92, 0x54, 0x0c, 0x66, 0x31, 0x5a, 0x91, 0x0f,
+	0x60, 0xcd, 0xe5, 0xc1, 0x11, 0x89, 0x3d, 0x1a, 0x2d, 0x89, 0xdd, 0x86, 0x5b, 0x5a, 0xa8, 0x62,
+	0x3e, 0x83, 0xa6, 0xbc, 0x85, 0x4f, 0x69, 0x7f, 0x09, 0xde, 0x16, 0x6c, 0xaa, 0xb0, 0xdc, 0xcd,
+	0x57, 0x5d, 0x1e, 0xbc, 0x17, 0xe4, 0x2b, 0x5d, 0xfe, 0x8f, 0xdb, 0x48, 0xd6, 0x4d, 0x46, 0x2b,
+	0xe2, 0x63, 0x69, 0x3b, 0x09, 0xc5, 0x17, 0x3f, 0x21, 0xdf, 0x17, 0x90, 0xb3, 0xda, 0x69, 0xde,
+	0x8a, 0xf4, 0x41, 0x92, 0x5e, 0xf8, 0xfe, 0xd1, 0xac, 0x63, 0xfe, 0xf9, 0xba, 0xb9, 0x9c, 0x6b,
+	0x5a, 0xce, 0x93, 0x13, 0x35, 0xaa, 0x3a, 0xf1, 0x23, 0xa0, 0x5c, 0x36, 0x6f, 0x49, 0x22, 0xc2,
+	0xff, 0x72, 0xe6, 0x2e, 0xe0, 0xbf, 0xb9, 0xd3, 0x53, 0x9f, 0xfc, 0xa8, 0x43, 0xcd, 0xe5, 0x01,
+	0x7a, 0x03, 0xd7, 0xf3, 0x03, 0x78, 0xbb, 0xa3, 0xa6, 0xba, 0xa3, 0x4f, 0x02, 0xbe, 0x37, 0x57,
+	0x9a, 0x42, 0xd1, 0x2b, 0x68, 0xce, 0x26, 0x64, 0xbb, 0xe8, 0x9f, 0x09, 0xf8, 0xee, 0x1c, 0x41,
+	0x61, 0xde, 0xc1, 0x9a, 0x3e, 0x16, 0x3b, 0x7a, 0x84, 0x26, 0xe2, 0xfb, 0x57, 0x88, 0x0a, 0xf9,
+	0x1a, 0x20, 0x3f, 0x0f, 0x7a, 0xc8, 0x4c, 0xc1, 0x7b, 0xf3, 0x14, 0x45, 0x3a, 0x84, 0x46, 0x36,
+	0x05, 0xad, 0xe2, 0x3d, 0x52, 0x2b, 0xde, 0x2d, 0xb3, 0xaa, 0xe8, 0x03, 0xa8, 0x4f, 0xba, 0x73,
+	0x4b, 0x77, 0x93, 0x46, 0xbc, 0x53, 0x62, 0xcc, 0x57, 0x45, 0x6f, 0xf0, 0x82, 0xb7, 0x26, 0x16,
+	0xab, 0x52, 0xda, 0xec, 0x29, 0x52, 0xef, 0xf4, 0x02, 0x52, 0x13, 0x8b, 0xc8, 0xd2, 0x6e, 0x46,
+	0x27, 0x70, 0xb3, 0xd8, 0xca, 0x77, 0xca, 0x53, 0xc9, 0x64, 0xfc, 0xe0, 0x4a, 0x79, 0x0a, 0x7e,
+	0xf9, 0xe8, 0xe7, 0xc8, 0x32, 0x2e, 0x47, 0x96, 0xf1, 0x7b, 0x64, 0x19, 0x17, 0x63, 0xab, 0x72,
+	0x39, 0xb6, 0x2a, 0xbf, 0xc6, 0x56, 0xe5, 0xd3, 0xa6, 0x7c, 0x97, 0xce, 0xb2, 0xe7, 0xe9, 0x7c,
+	0x40, 0x79, 0xaf, 0x21, 0x5f, 0x98, 0xa7, 0x7f, 0x02, 0x00, 0x00, 0xff, 0xff, 0xc4, 0x55, 0xda,
+	0x0b, 0xb8, 0x06, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1222,12 +929,9 @@ const _ = grpc.SupportPackageIsVersion4
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MsgClient interface {
 	RequestLoan(ctx context.Context, in *MsgRequestLoan, opts ...grpc.CallOption) (*MsgRequestLoanResponse, error)
-	ApproveLoan(ctx context.Context, in *MsgApproveLoan, opts ...grpc.CallOption) (*MsgApproveLoanResponse, error)
 	RepayLoan(ctx context.Context, in *MsgRepayLoan, opts ...grpc.CallOption) (*MsgRepayLoanResponse, error)
 	LiquidateLoan(ctx context.Context, in *MsgLiquidateLoan, opts ...grpc.CallOption) (*MsgLiquidateLoanResponse, error)
 	CancelLoan(ctx context.Context, in *MsgCancelLoan, opts ...grpc.CallOption) (*MsgCancelLoanResponse, error)
-	TokenMint(ctx context.Context, in *MsgTokenMint, opts ...grpc.CallOption) (*MsgTokenMintResponse, error)
-	BurnToken(ctx context.Context, in *MsgBurnToken, opts ...grpc.CallOption) (*MsgBurnTokenResponse, error)
 	Redeem(ctx context.Context, in *MsgRedeem, opts ...grpc.CallOption) (*MsgRedeemResponse, error)
 	Stake(ctx context.Context, in *MsgStake, opts ...grpc.CallOption) (*MsgStakeResponse, error)
 	WithdrawStake(ctx context.Context, in *MsgWithdrawStake, opts ...grpc.CallOption) (*MsgWithdrawStakeResponse, error)
@@ -1246,15 +950,6 @@ func NewMsgClient(cc grpc1.ClientConn) MsgClient {
 func (c *msgClient) RequestLoan(ctx context.Context, in *MsgRequestLoan, opts ...grpc.CallOption) (*MsgRequestLoanResponse, error) {
 	out := new(MsgRequestLoanResponse)
 	err := c.cc.Invoke(ctx, "/loan.loan.Msg/RequestLoan", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *msgClient) ApproveLoan(ctx context.Context, in *MsgApproveLoan, opts ...grpc.CallOption) (*MsgApproveLoanResponse, error) {
-	out := new(MsgApproveLoanResponse)
-	err := c.cc.Invoke(ctx, "/loan.loan.Msg/ApproveLoan", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1282,24 +977,6 @@ func (c *msgClient) LiquidateLoan(ctx context.Context, in *MsgLiquidateLoan, opt
 func (c *msgClient) CancelLoan(ctx context.Context, in *MsgCancelLoan, opts ...grpc.CallOption) (*MsgCancelLoanResponse, error) {
 	out := new(MsgCancelLoanResponse)
 	err := c.cc.Invoke(ctx, "/loan.loan.Msg/CancelLoan", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *msgClient) TokenMint(ctx context.Context, in *MsgTokenMint, opts ...grpc.CallOption) (*MsgTokenMintResponse, error) {
-	out := new(MsgTokenMintResponse)
-	err := c.cc.Invoke(ctx, "/loan.loan.Msg/TokenMint", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *msgClient) BurnToken(ctx context.Context, in *MsgBurnToken, opts ...grpc.CallOption) (*MsgBurnTokenResponse, error) {
-	out := new(MsgBurnTokenResponse)
-	err := c.cc.Invoke(ctx, "/loan.loan.Msg/BurnToken", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -1354,12 +1031,9 @@ func (c *msgClient) WithdrawPartial(ctx context.Context, in *MsgWithdrawPartial,
 // MsgServer is the server API for Msg service.
 type MsgServer interface {
 	RequestLoan(context.Context, *MsgRequestLoan) (*MsgRequestLoanResponse, error)
-	ApproveLoan(context.Context, *MsgApproveLoan) (*MsgApproveLoanResponse, error)
 	RepayLoan(context.Context, *MsgRepayLoan) (*MsgRepayLoanResponse, error)
 	LiquidateLoan(context.Context, *MsgLiquidateLoan) (*MsgLiquidateLoanResponse, error)
 	CancelLoan(context.Context, *MsgCancelLoan) (*MsgCancelLoanResponse, error)
-	TokenMint(context.Context, *MsgTokenMint) (*MsgTokenMintResponse, error)
-	BurnToken(context.Context, *MsgBurnToken) (*MsgBurnTokenResponse, error)
 	Redeem(context.Context, *MsgRedeem) (*MsgRedeemResponse, error)
 	Stake(context.Context, *MsgStake) (*MsgStakeResponse, error)
 	WithdrawStake(context.Context, *MsgWithdrawStake) (*MsgWithdrawStakeResponse, error)
@@ -1374,9 +1048,6 @@ type UnimplementedMsgServer struct {
 func (*UnimplementedMsgServer) RequestLoan(ctx context.Context, req *MsgRequestLoan) (*MsgRequestLoanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RequestLoan not implemented")
 }
-func (*UnimplementedMsgServer) ApproveLoan(ctx context.Context, req *MsgApproveLoan) (*MsgApproveLoanResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ApproveLoan not implemented")
-}
 func (*UnimplementedMsgServer) RepayLoan(ctx context.Context, req *MsgRepayLoan) (*MsgRepayLoanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method RepayLoan not implemented")
 }
@@ -1385,12 +1056,6 @@ func (*UnimplementedMsgServer) LiquidateLoan(ctx context.Context, req *MsgLiquid
 }
 func (*UnimplementedMsgServer) CancelLoan(ctx context.Context, req *MsgCancelLoan) (*MsgCancelLoanResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CancelLoan not implemented")
-}
-func (*UnimplementedMsgServer) TokenMint(ctx context.Context, req *MsgTokenMint) (*MsgTokenMintResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method TokenMint not implemented")
-}
-func (*UnimplementedMsgServer) BurnToken(ctx context.Context, req *MsgBurnToken) (*MsgBurnTokenResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method BurnToken not implemented")
 }
 func (*UnimplementedMsgServer) Redeem(ctx context.Context, req *MsgRedeem) (*MsgRedeemResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method Redeem not implemented")
@@ -1426,24 +1091,6 @@ func _Msg_RequestLoan_Handler(srv interface{}, ctx context.Context, dec func(int
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).RequestLoan(ctx, req.(*MsgRequestLoan))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Msg_ApproveLoan_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgApproveLoan)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).ApproveLoan(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/loan.loan.Msg/ApproveLoan",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).ApproveLoan(ctx, req.(*MsgApproveLoan))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1498,42 +1145,6 @@ func _Msg_CancelLoan_Handler(srv interface{}, ctx context.Context, dec func(inte
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.(MsgServer).CancelLoan(ctx, req.(*MsgCancelLoan))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Msg_TokenMint_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgTokenMint)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).TokenMint(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/loan.loan.Msg/TokenMint",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).TokenMint(ctx, req.(*MsgTokenMint))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Msg_BurnToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(MsgBurnToken)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(MsgServer).BurnToken(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/loan.loan.Msg/BurnToken",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(MsgServer).BurnToken(ctx, req.(*MsgBurnToken))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -1637,10 +1248,6 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 			Handler:    _Msg_RequestLoan_Handler,
 		},
 		{
-			MethodName: "ApproveLoan",
-			Handler:    _Msg_ApproveLoan_Handler,
-		},
-		{
 			MethodName: "RepayLoan",
 			Handler:    _Msg_RepayLoan_Handler,
 		},
@@ -1651,14 +1258,6 @@ var _Msg_serviceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "CancelLoan",
 			Handler:    _Msg_CancelLoan_Handler,
-		},
-		{
-			MethodName: "TokenMint",
-			Handler:    _Msg_TokenMint_Handler,
-		},
-		{
-			MethodName: "BurnToken",
-			Handler:    _Msg_BurnToken_Handler,
 		},
 		{
 			MethodName: "Redeem",
@@ -1759,64 +1358,6 @@ func (m *MsgRequestLoanResponse) MarshalTo(dAtA []byte) (int, error) {
 }
 
 func (m *MsgRequestLoanResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgApproveLoan) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgApproveLoan) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgApproveLoan) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Id != 0 {
-		i = encodeVarintTx(dAtA, i, uint64(m.Id))
-		i--
-		dAtA[i] = 0x10
-	}
-	if len(m.Creator) > 0 {
-		i -= len(m.Creator)
-		copy(dAtA[i:], m.Creator)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgApproveLoanResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgApproveLoanResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgApproveLoanResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -1991,136 +1532,6 @@ func (m *MsgCancelLoanResponse) MarshalTo(dAtA []byte) (int, error) {
 }
 
 func (m *MsgCancelLoanResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgTokenMint) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgTokenMint) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgTokenMint) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.DenomAmount != 0 {
-		i = encodeVarintTx(dAtA, i, uint64(m.DenomAmount))
-		i--
-		dAtA[i] = 0x18
-	}
-	if len(m.Denom) > 0 {
-		i -= len(m.Denom)
-		copy(dAtA[i:], m.Denom)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Denom)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Creator) > 0 {
-		i -= len(m.Creator)
-		copy(dAtA[i:], m.Creator)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgTokenMintResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgTokenMintResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgTokenMintResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgBurnToken) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgBurnToken) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgBurnToken) MarshalToSizedBuffer(dAtA []byte) (int, error) {
-	i := len(dAtA)
-	_ = i
-	var l int
-	_ = l
-	if m.Amount != 0 {
-		i = encodeVarintTx(dAtA, i, uint64(m.Amount))
-		i--
-		dAtA[i] = 0x18
-	}
-	if len(m.Denom) > 0 {
-		i -= len(m.Denom)
-		copy(dAtA[i:], m.Denom)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Denom)))
-		i--
-		dAtA[i] = 0x12
-	}
-	if len(m.Creator) > 0 {
-		i -= len(m.Creator)
-		copy(dAtA[i:], m.Creator)
-		i = encodeVarintTx(dAtA, i, uint64(len(m.Creator)))
-		i--
-		dAtA[i] = 0xa
-	}
-	return len(dAtA) - i, nil
-}
-
-func (m *MsgBurnTokenResponse) Marshal() (dAtA []byte, err error) {
-	size := m.Size()
-	dAtA = make([]byte, size)
-	n, err := m.MarshalToSizedBuffer(dAtA[:size])
-	if err != nil {
-		return nil, err
-	}
-	return dAtA[:n], nil
-}
-
-func (m *MsgBurnTokenResponse) MarshalTo(dAtA []byte) (int, error) {
-	size := m.Size()
-	return m.MarshalToSizedBuffer(dAtA[:size])
-}
-
-func (m *MsgBurnTokenResponse) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	i := len(dAtA)
 	_ = i
 	var l int
@@ -2478,31 +1889,6 @@ func (m *MsgRequestLoanResponse) Size() (n int) {
 	return n
 }
 
-func (m *MsgApproveLoan) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Creator)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	if m.Id != 0 {
-		n += 1 + sovTx(uint64(m.Id))
-	}
-	return n
-}
-
-func (m *MsgApproveLoanResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	return n
-}
-
 func (m *MsgRepayLoan) Size() (n int) {
 	if m == nil {
 		return 0
@@ -2570,64 +1956,6 @@ func (m *MsgCancelLoan) Size() (n int) {
 }
 
 func (m *MsgCancelLoanResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	return n
-}
-
-func (m *MsgTokenMint) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Creator)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	l = len(m.Denom)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	if m.DenomAmount != 0 {
-		n += 1 + sovTx(uint64(m.DenomAmount))
-	}
-	return n
-}
-
-func (m *MsgTokenMintResponse) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	return n
-}
-
-func (m *MsgBurnToken) Size() (n int) {
-	if m == nil {
-		return 0
-	}
-	var l int
-	_ = l
-	l = len(m.Creator)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	l = len(m.Denom)
-	if l > 0 {
-		n += 1 + l + sovTx(uint64(l))
-	}
-	if m.Amount != 0 {
-		n += 1 + sovTx(uint64(m.Amount))
-	}
-	return n
-}
-
-func (m *MsgBurnTokenResponse) Size() (n int) {
 	if m == nil {
 		return 0
 	}
@@ -3010,157 +2338,6 @@ func (m *MsgRequestLoanResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgRequestLoanResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgApproveLoan) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgApproveLoan: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgApproveLoan: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Creator = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Id", wireType)
-			}
-			m.Id = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Id |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgApproveLoanResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgApproveLoanResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgApproveLoanResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:
@@ -3614,372 +2791,6 @@ func (m *MsgCancelLoanResponse) Unmarshal(dAtA []byte) error {
 		}
 		if fieldNum <= 0 {
 			return fmt.Errorf("proto: MsgCancelLoanResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgTokenMint) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgTokenMint: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgTokenMint: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Creator = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Denom", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Denom = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field DenomAmount", wireType)
-			}
-			m.DenomAmount = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.DenomAmount |= int64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgTokenMintResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgTokenMintResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgTokenMintResponse: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgBurnToken) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgBurnToken: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgBurnToken: illegal tag %d (wire type %d)", fieldNum, wire)
-		}
-		switch fieldNum {
-		case 1:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Creator", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Creator = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 2:
-			if wireType != 2 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Denom", wireType)
-			}
-			var stringLen uint64
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthTx
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthTx
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.Denom = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
-		case 3:
-			if wireType != 0 {
-				return fmt.Errorf("proto: wrong wireType = %d for field Amount", wireType)
-			}
-			m.Amount = 0
-			for shift := uint(0); ; shift += 7 {
-				if shift >= 64 {
-					return ErrIntOverflowTx
-				}
-				if iNdEx >= l {
-					return io.ErrUnexpectedEOF
-				}
-				b := dAtA[iNdEx]
-				iNdEx++
-				m.Amount |= int64(b&0x7F) << shift
-				if b < 0x80 {
-					break
-				}
-			}
-		default:
-			iNdEx = preIndex
-			skippy, err := skipTx(dAtA[iNdEx:])
-			if err != nil {
-				return err
-			}
-			if (skippy < 0) || (iNdEx+skippy) < 0 {
-				return ErrInvalidLengthTx
-			}
-			if (iNdEx + skippy) > l {
-				return io.ErrUnexpectedEOF
-			}
-			iNdEx += skippy
-		}
-	}
-
-	if iNdEx > l {
-		return io.ErrUnexpectedEOF
-	}
-	return nil
-}
-func (m *MsgBurnTokenResponse) Unmarshal(dAtA []byte) error {
-	l := len(dAtA)
-	iNdEx := 0
-	for iNdEx < l {
-		preIndex := iNdEx
-		var wire uint64
-		for shift := uint(0); ; shift += 7 {
-			if shift >= 64 {
-				return ErrIntOverflowTx
-			}
-			if iNdEx >= l {
-				return io.ErrUnexpectedEOF
-			}
-			b := dAtA[iNdEx]
-			iNdEx++
-			wire |= uint64(b&0x7F) << shift
-			if b < 0x80 {
-				break
-			}
-		}
-		fieldNum := int32(wire >> 3)
-		wireType := int(wire & 0x7)
-		if wireType == 4 {
-			return fmt.Errorf("proto: MsgBurnTokenResponse: wiretype end group for non-group")
-		}
-		if fieldNum <= 0 {
-			return fmt.Errorf("proto: MsgBurnTokenResponse: illegal tag %d (wire type %d)", fieldNum, wire)
 		}
 		switch fieldNum {
 		default:

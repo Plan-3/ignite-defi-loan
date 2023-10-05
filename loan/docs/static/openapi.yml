@@ -2640,10 +2640,6 @@ definitions:
     description: QueryParamsResponse is response type for the Query/Params RPC method.
   loan.loan.MsgAddCollateralResponse:
     type: object
-  loan.loan.MsgApproveLoanResponse:
-    type: object
-  loan.loan.MsgBurnTokenResponse:
-    type: object
   loan.loan.MsgCancelLoanResponse:
     type: object
   loan.loan.MsgLiquidateLoanResponse:
@@ -2655,8 +2651,6 @@ definitions:
   loan.loan.MsgRequestLoanResponse:
     type: object
   loan.loan.MsgStakeResponse:
-    type: object
-  loan.loan.MsgTokenMintResponse:
     type: object
   loan.loan.MsgWithdrawPartialResponse:
     type: object

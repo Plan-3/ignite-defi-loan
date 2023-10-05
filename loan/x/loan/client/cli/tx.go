@@ -31,12 +31,9 @@ func GetTxCmd() *cobra.Command {
 	}
 
 	cmd.AddCommand(CmdRequestLoan())
-	cmd.AddCommand(CmdApproveLoan())
 	cmd.AddCommand(CmdRepayLoan())
 	cmd.AddCommand(CmdLiquidateLoan())
 	cmd.AddCommand(CmdCancelLoan())
-	cmd.AddCommand(CmdTokenMint())
-	cmd.AddCommand(CmdBurnToken())
 	cmd.AddCommand(CmdRedeem())
 	cmd.AddCommand(CmdStake())
 	cmd.AddCommand(CmdWithdrawStake())

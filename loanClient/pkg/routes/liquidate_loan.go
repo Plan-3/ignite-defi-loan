@@ -2,7 +2,6 @@ package routes
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"io/ioutil"
@@ -63,11 +62,13 @@ func LiquidateLoan(w http.ResponseWriter, r *http.Request) {
 		log.Fatal(err)
 	}
 	
+	
+	/* may not need
 	block, err := client.LatestBlockHeight(ctx);
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(block)
+	*/
 	
 	// Get account from the keyring
 	account, err := client.Account(msg.Creator)

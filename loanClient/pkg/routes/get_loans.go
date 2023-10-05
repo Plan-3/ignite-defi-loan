@@ -28,6 +28,8 @@ func GetLoans(w http.ResponseWriter, r *http.Request) {
 			log.Fatal(err)
 		}
 
+		fmt.Print(client)
+
     // Instantiate a query client for your `blog` blockchain
     queryClient := types.NewQueryClient(client.Context())
 

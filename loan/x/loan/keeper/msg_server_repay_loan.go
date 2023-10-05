@@ -22,15 +22,9 @@ func (k msgServer) RepayLoan(goCtx context.Context, msg *types.MsgRepayLoan) (*t
 		return nil, sdkerrors.Wrapf(types.ErrWrongLoanState, "loan is not in the correct state for this action, loan is in %s state. Needs to be in approved", loan.State)
 	}
 
-	borrower, _ := sdk.AccAddressFromBech32(loan.Borrower)
-	if msg.Creator != loan.Borrower {
-		return nil, sdkerrors.Wrap(types.ErrUnauthorized, "Cannot repay: not the borrower")
-	}
+	collateral, amount, borrower := k.GetLoanContent(ctx, loan)
 
-	// grab necessary coins from borrower and send to lender
-	amount, _ := sdk.ParseCoinsNormalized(loan.Amount)
-	collateral, _ := sdk.ParseCoinsNormalized(loan.Collateral)
-	// add balance checks to make sure borrower has enough to repay
+	// !!add balance checks to make sure borrower has enough to repay!!
 
 	// calculate interest 1% of loan amount a year: (block current - block start) * (1/blocks in a year)
 	// until we have a better way to calculate block time set to standard

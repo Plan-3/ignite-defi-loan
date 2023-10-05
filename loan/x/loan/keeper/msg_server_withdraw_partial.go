@@ -22,35 +22,15 @@ func (k msgServer) WithdrawPartial(goCtx context.Context, msg *types.MsgWithdraw
 		return nil, sdkerrors.Wrapf(types.ErrWrongLoanState, "loan %d is not in requested state", msg.Id)
 	}
 	
-	// get borrower account
-	borrower, _ := sdk.AccAddressFromBech32(loan.Borrower)
-	if loan.Borrower != msg.Creator {
-		return nil, sdkerrors.Wrap(types.ErrNotBorrower, "You are not borrower")
-	}
-
-	collateral, err := sdk.ParseCoinsNormalized(loan.Collateral)
-	if err != nil {
-		return nil, sdkerrors.Wrap(types.ErrInvalidRequest, "Can't parse collateral")
-	}
-
-	loanAmount, err := sdk.ParseCoinsNormalized(loan.Amount)
-	if err != nil {
-		return nil, sdkerrors.Wrap(types.ErrInvalidRequest, "Can't parse loan amount")
-	}
+	collateral, loanAmount, borrower := k.GetLoanContent(ctx, loan)
 	
 	// get loan amount
 	amount, err := sdk.ParseCoinsNormalized(msg.Amount)
 	if err != nil {
 		return nil, sdkerrors.Wrap(types.ErrInvalidRequest, "Can't parse amount")
 	}
-	/*
-	handle this on webserver first 
-	!!! look into dec coins !!! may require rewriting all code
-	handled ^ all coins in cwei units 10e-9 except zusd\
-	formatted on client side
-	*/
-	
 
+	
 	// collateral and amount should be in cwei units already 
 	// add to var for easier use
 	dollarAmount := amount[0].Amount
@@ -84,13 +64,12 @@ func (k msgServer) WithdrawPartial(goCtx context.Context, msg *types.MsgWithdraw
 		return nil, sdkError
 	}
 	
-	// update values
+	// update loan values
 	newLoanAmount := loanAmount[0].Amount.Sub(zusdToSendBack)
 	newLoanAmountCoin := sdk.NewCoin("zusd", newLoanAmount)
 	loan.Amount = newLoanAmountCoin.String()
 	newCollateralAmount := collateralPrice.Sub(dollarAmount)
-	// to legacy decimal
-	newCollateralAmountCoin := sdk.NewDecCoin(collateral[0].Denom, newCollateralAmount)
+	newCollateralAmountCoin := sdk.NewCoin(collateral[0].Denom, newCollateralAmount)
 	loan.Collateral = newCollateralAmountCoin.String()
 	
 	// store updated loan values

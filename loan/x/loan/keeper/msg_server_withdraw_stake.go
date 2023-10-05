@@ -39,10 +39,13 @@ func (k msgServer) WithdrawStake(goCtx context.Context, msg *types.MsgWithdrawSt
 		}
 	}
 
-	// create coins to be burnt
-	// cToken is the collateral token
-	// zToken is the zusd token
-	// positionCoin is the position token
+	/*
+	 create coins to be burnt
+	 cToken is the collateral token
+	 zToken is the zusd token
+	 positionCoin is the position token
+	*/ 
+
 	cToken := sdk.NewCoin("cPh", cphToken)
 	zToken := sdk.NewCoin("zPh", zphToken)
 	positionCoin := sdk.NewCoin("posi", posiTokenAmount)
@@ -82,15 +85,6 @@ func (k msgServer) WithdrawStake(goCtx context.Context, msg *types.MsgWithdrawSt
 		lpPercent = zusdTotalAtTimeOfWithdrawal.Add(posiTokenAmount).Quo(posiTokenAmount)
 	}
 
-	// /*
-	// 	need to calculate coin percentages of all collateral tokens in pool and zusd
-	// 	get amount of each token in module account
-	// 	type to Dec
-	// 	multiply by lpPercent
-	// 	reconvert to Int
-	// 	create coin from Int as amount
-	// 	send coins to creator
-	// */
 
 	// set up variable holders
 	moduleCtz := sdk.NewInt(0)

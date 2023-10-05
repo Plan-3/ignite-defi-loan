@@ -2,7 +2,6 @@ package routes
 
 import (
 	"context"
-	"fmt"
 	"log"
 	"net/http"
 	"io/ioutil"
@@ -51,7 +50,6 @@ func CancelLoan(w http.ResponseWriter, r *http.Request) {
 		return
 	}	
 	
-
 	// Set up your cosmos client and other initialization code here as before...
 	ctx := context.Background()
 	addressPrefix := "cosmos"
@@ -60,35 +58,23 @@ func CancelLoan(w http.ResponseWriter, r *http.Request) {
 	// Create a Cosmos client instance
 	client, err := cosmosclient.New(ctx, cosmosclient.WithAddressPrefix(addressPrefix))
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
 	
-	// Account `alice` was initialized during `ignite chain serve`
-	// get accountName from a post body
-	accountName := "alice"
-	
-	// Get account from the keyring
-	account, err := client.Account(accountName)
+	account, err := client.Account(msg.Creator)
 	if err != nil {
-		log.Fatal(err)
+		log.Print(err)
 	}
-	
-	addr, err := account.Address(addressPrefix)
-	if err != nil {
-		log.Fatal(err)
-	}
-
-	msg.Creator = addr
 
 	// Broadcast a transaction from account `alice` with the message
   // to create a post store response in txResp
   txResp, err := client.BroadcastTx(ctx, account, msg)
   if err != nil {
-      log.Fatal(err)
+      log.Print(err)
     }
 
-  res, _ := json.Marshal(txResp)
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	w.Write(res)
-}
+		res, _ := json.Marshal(txResp)
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		w.Write(res)
+	}

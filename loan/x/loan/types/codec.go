@@ -9,12 +9,9 @@ import (
 
 func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgRequestLoan{}, "loan/RequestLoan", nil)
-	cdc.RegisterConcrete(&MsgApproveLoan{}, "loan/ApproveLoan", nil)
 	cdc.RegisterConcrete(&MsgRepayLoan{}, "loan/RepayLoan", nil)
 	cdc.RegisterConcrete(&MsgLiquidateLoan{}, "loan/LiquidateLoan", nil)
 	cdc.RegisterConcrete(&MsgCancelLoan{}, "loan/CancelLoan", nil)
-	cdc.RegisterConcrete(&MsgTokenMint{}, "loan/TokenMint", nil)
-	cdc.RegisterConcrete(&MsgBurnToken{}, "loan/BurnToken", nil)
 	cdc.RegisterConcrete(&MsgRedeem{}, "loan/Redeem", nil)
 	cdc.RegisterConcrete(&MsgStake{}, "loan/Stake", nil)
 	cdc.RegisterConcrete(&MsgWithdrawStake{}, "loan/WithdrawStake", nil)
@@ -28,9 +25,6 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 		&MsgRequestLoan{},
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgApproveLoan{},
-	)
-	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgRepayLoan{},
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
@@ -38,12 +32,6 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgCancelLoan{},
-	)
-	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgTokenMint{},
-	)
-	registry.RegisterImplementations((*sdk.Msg)(nil),
-		&MsgBurnToken{},
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgRedeem{},

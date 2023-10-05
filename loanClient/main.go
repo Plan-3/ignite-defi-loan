@@ -36,7 +36,6 @@ func main() {
     r.HandleFunc("/withdraw", routes.WithdrawStake).Methods("POST")
 	r.HandleFunc("/requestloan", routes.CreateLoan).Methods("POST")
     r.HandleFunc("/cancelloan", routes.CancelLoan).Methods("POST")
-    r.HandleFunc("/approveloan", routes.ApproveLoan).Methods("POST")
     r.HandleFunc("/liquidateloan", routes.LiquidateLoan).Methods("POST")
     r.HandleFunc("/repayloan", routes.RepayLoan).Methods("POST")
     r.HandleFunc("/addcollateral", routes.AddCollateral).Methods("POST")
@@ -56,3 +55,12 @@ func main() {
 
 	log.Fatal(http.ListenAndServe(":8080", handler))
 }
+var (
+    creator = "cosmos1xv9tklw7d82sezh9haa573wufgy59vmwe6xxe5" // Replace with your Cosmos address
+    amount = "100zusd" // Replace with the amount of stake you want to request
+    fee = "75000usdc" // Replace with the amount of stake you want to request
+    collateral = "10cqt" // Replace with the amount of stake you want to request
+    deadline = "100000" // Replace with the amount of stake you want to request
+)
+
+

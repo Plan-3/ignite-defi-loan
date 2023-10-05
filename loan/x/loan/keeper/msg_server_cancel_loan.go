@@ -19,21 +19,21 @@ func (k msgServer) CancelLoan(goCtx context.Context, msg *types.MsgCancelLoan) (
 	}
 	// allow lenders to cancel loans by commenting out this if statement
 
-	/*
-		if loan.Borrower != msg.Creator {
-				return nil, sdkerrors.Wrap(types.ErrUnauthorized, "Cannot cancel: not the borrower")
-		}
-	*/
-
+	if loan.Borrower != msg.Creator {
+			return nil, sdkerrors.Wrap(types.ErrUnauthorized, "Cannot cancel: not the borrower")
+	}
+	
 	if loan.State != "requested" {
 		return nil, sdkerrors.Wrapf(types.ErrWrongLoanState, "%v", loan.State)
 	}
-	borrower, _ := sdk.AccAddressFromBech32(loan.Borrower)
-	collateral, _ := sdk.ParseCoinsNormalized(loan.Collateral)
+
+	collateral, _, borrower := k.GetLoanContent(ctx, loan)
+
 	err := k.bankKeeper.SendCoinsFromModuleToAccount(ctx, types.Nbtp, borrower, collateral)
 	if err != nil {
 		return nil, err
 	}
+
 	loan.State = "cancelled"
 	k.SetLoan(ctx, loan)
 	return &types.MsgCancelLoanResponse{}, nil

@@ -112,8 +112,11 @@ func (k Keeper) ModuleStakingAmounts(ctx sdk.Context) (sdk.Int, sdk.Int, sdk.Int
 
 	ModuleAccountToAddress, _ := sdk.AccAddressFromBech32("cosmos1gu4m79yj8ch8em7c22vzt3qparg69ymm75qf6l")
 
-	// type the module account to type Balance
-	// Balance has getAddress and getCoins methods
+	/*
+	* type the module account to type Balance
+	* Balance has getAddress and getCoins methods
+	*/ 
+
 	moduleBalances := k.bankKeeper.GetAccountsBalances(ctx)
 	var loanModule banktypes.Balance
 	for _, accounts := range moduleBalances {
@@ -129,10 +132,13 @@ func (k Keeper) ModuleStakingAmounts(ctx sdk.Context) (sdk.Int, sdk.Int, sdk.Int
 	cqtPrice := sdk.NewInt(0)
 	zusdTotalAtTimeOfDeposit := sdk.NewInt(0)
 
-	// loop through all coins in module account i.e. bank vault
-	// get price of collateral coins
-	// get total zusd in bank vault at time of deposit
-	// will need to add new cases as new collaterals are accepted
+	/*
+	* loop through all coins in module account i.e. bank vault
+	* get price of collateral coins
+	* get total zusd in bank vault at time of deposit
+	* will need to add new cases as new collaterals are accepted
+	*/
+
 	for _, coin := range moduleCoins {
 		switch coin.Denom {
 		case "ctz":
@@ -150,9 +156,15 @@ func (k Keeper) ModuleStakingAmounts(ctx sdk.Context) (sdk.Int, sdk.Int, sdk.Int
 	return ctzPrice, cqtPrice, zusdTotalAtTimeOfDeposit, moduleCoins
 }
 
+func (k Keeper) GetLoanContent(ctx sdk.Context, loan types.Loan) (sdk.Coins, sdk.Coins, sdk.AccAddress){
+
+	borrower, _ := sdk.AccAddressFromBech32(loan.Borrower)
+	collateral, _ := sdk.ParseCoinsNormalized(loan.Collateral)
+	amount, _ := sdk.ParseCoinsNormalized(loan.Amount)
+
+	return collateral, amount, borrower
+}
+
 /*
-add more keeper methods need one for
-calculating risk,
-one for calculating collateral in terms of cwei,
-and one for calculating interest
+* add more keeper methods here
 */

@@ -16,8 +16,10 @@ import (
 
 	// Importing the types package of your blog blockchain
 	"loan/x/loan/types"
+	//"cosmossdk.io/simapp"
 
 )
+
 
 func ConvertDecimalAmount(amount string) (string, error) {
 	// Use regular expression to split the input string into number and string parts
@@ -125,14 +127,27 @@ func CreateLoan(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Print(err)
 	}
+	/*  NOTE: this is not working 	*/
+	// app := simapp.NewSimApp()
 
+	// txBuilder := app.TxConfig().NewTxBuilder()
+	// txBuilder.SetMsgs(msg)
+	// bz, err := TxConfig.TxEncoder()(txBuilder.GetTx())
+
+	
+	
 	// Broadcast a transaction from account `alice` with the message
   // to create a post store response in txResp
-  txResp, err := client.BroadcastTx(ctx, account, msg)
+  tx, err := client.CreateTx(ctx, account, msg)
   if err != nil {
       log.Print(err)
-    }
+  }
 
+	txResp, err := client.BroadcastTx(ctx, tx)
+	if err != nil {
+			log.Print(err)
+	}
+	
 		res, _ := json.Marshal(txResp)
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
